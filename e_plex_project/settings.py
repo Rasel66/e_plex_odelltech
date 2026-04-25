@@ -70,9 +70,9 @@ WSGI_APPLICATION = 'e_plex_project.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'e_plex',
-        'USER': 'root',
-        'PASSWORD': '',
+        'NAME': 'odelltec_eplex_db',
+        'USER': 'odelltec_rasel',
+        'PASSWORD': 'rasel@5437',
         'HOST': '127.0.0.1',
         'PORT': '3306'
     }
