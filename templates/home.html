@@ -3,69 +3,208 @@
 
 {% block content %}
  <!-- HERO -->
-<section class="hero text-center" id="hero_section">
+{% comment %} <section class="hero text-center" id="hero_section">
     <div class="container">
-        {% comment %} <div class="hero-badge">EPLEXSOFT</div> {% endcomment %}
         <h1>Complete E-Commerce Management Solution</h1>
         <p>Accelerate business growth with a scalable e-commerce solution designed to engage customers and maximize conversions</p>
         <a href="{% url 'get_started_url' %}" class="btn-primary-hero">Get Started <i class="bi bi-arrow-right"></i></a>
         <a href="#" class="btn-outline-hero">Watch Demo <i class="fas fa-play ms-1" style="font-size:.75rem;"></i></a>
     </div>
+</section> {% endcomment %}
+<!-- ═══════════════════════════════════════
+     HERO
+═══════════════════════════════════════ -->
+<section class="hero" id="hero">
+  <div class="container hero-inner">
+    <div class="hero-badge-pill">
+      <span class="badge-live"></span>
+      Bangladesh's #1 Ecommerce Platform for SMEs
+    </div>
+    <h1>Start Your Online Business Easily and<br><em>Grow It into a Brand</em></h1>
+    <p class="hero-sub">Launch your own ecommerce website in minutes with full support <br> <span style="color: #9eff1b;">- no technical skills needed.</span></p>
+    <p class="hero-support"><i class="fas fa-check-circle"></i> We don't just give you software. We help you sell, grow, and succeed.</p>
+    <div class="final-btns">
+      <a href="#" class="btn-cta-white"><i class="bi bi-rocket-takeoff"></i> Book Free Demo</a>
+      <a href="https://wa.me/880" class="btn-cta-outline"><i class="fab fa-whatsapp"></i> WhatsApp Now</a>
+    </div>
+    {% comment %} <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="stat-num">100+</div>
+        <div class="stat-label">Active Stores</div>
+      </div>
+      <div class="hero-stat">
+        <div class="stat-num">30 min</div>
+        <div class="stat-label">WhatsApp Response</div>
+      </div>
+      <div class="hero-stat">
+        <div class="stat-num">SteadFast</div>
+        <div class="stat-label">Local Delivery Stytem</div>
+      </div>
+      <div class="hero-stat">
+        <div class="stat-num">ERP</div>
+        <div class="stat-label">Integration Ready</div>
+      </div>
+    </div> {% endcomment %}
+  </div>
 </section>
 
-<!-- SOLUTION FOR YOUR BUSINESS -->
+
+<!-- ═══════════════════════════════════════
+     PROBLEM → SOLUTION
+═══════════════════════════════════════ -->
+<section class="problem-section">
+  <div class="container">
+    <!-- <div class="section-badge">The Problem</div> -->
+    <h2 class="section-title">Still Selling Only on Facebook?</h2>
+    <p class="section-sub" style="margin:0 0 0 0;max-width:100%;">Facebook is a great start — but it's quietly holding your business back.</p>
+    <div class="prob-grid">
+      <div class="prob-card fade-up">
+        <span class="prob-icon">📩</span>
+        <h4>Losing customers in inbox?</h4>
+        <p>Hundreds of DMs, missed orders, and frustrated customers you can never recover.</p>
+      </div>
+      <div class="prob-card fade-up" style="transition-delay:.1s">
+        <span class="prob-icon">📦</span>
+        <h4>No proper order tracking?</h4>
+        <p>Manual tracking through Messenger leads to errors and lost revenue every week.</p>
+      </div>
+      <div class="prob-card fade-up" style="transition-delay:.2s">
+        <span class="prob-icon">🎯</span>
+        <h4>No brand identity?</h4>
+        <p>Without your own store, customers don't see you as a serious, trustworthy business.</p>
+      </div>
+      <div class="prob-card fade-up" style="transition-delay:.3s">
+        <span class="prob-icon">📉</span>
+        <h4>Hard to scale?</h4>
+        <p>Facebook limits your reach, your data ownership, and your growth potential.</p>
+      </div>
+    </div>
+    <div class="sol-box fade-up">
+      <strong>With ePlex</strong>, you get your own ecommerce website — fully managed and ready to grow your business beyond Facebook.
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     OUR SOLUTION
+═══════════════════════════════════════ -->
+
+
+
+
+
+
 <section class="solution-section">
   <div class="container text-center">
     <div class="section-badge">Solution</div>
-    <h2 class="section-title">Our solution for your business</h2>
+    <h2 class="section-title">E-Plex solution for your business</h2>
     <p class="section-sub mb-5">All the tools you need to run your store, track inventory, and scale your business effortlessly.</p>
     <div class="row g-4 justify-content-center">
       <div class="col-6 col-md-3">
         <div class="solution-card fade-up">
-          {% comment %} <div class="solution-icon"><i class="fas fa-chart-line"></i></div> {% endcomment %}
-          <div class="solution-icon">
-            <img src="{% static 'img/icon_img/i1_Store_Mnagement.jpg' %}" alt="">
-          </div>
+          <div class="solution-icon">⚡</div>
           <h5>Streamlined Store Management</h5>
           <p>Manage products, orders, and customers from one simple dashboard.</p>
         </div>
       </div>
       <div class="col-6 col-md-3">
         <div class="solution-card fade-up" style="transition-delay:.1s">
-          <div class="solution-icon">
-            <img src="{% static 'img/icon_img/i2_collaborate_Securely.jpg' %}" alt="">
-          </div>
-          <h5>Collaborate Securely</h5>
-          <p>Role-based access with protected data sharing.</p>
+          <div class="solution-icon">📋</div>
+          <h5>Manage orders easily</h5>
+          <p>One dashboard for all orders, customers, and deliveries in one place.</p>
         </div>
       </div>
       <div class="col-6 col-md-3">
         <div class="solution-card fade-up" style="transition-delay:.2s">
-          <div class="solution-icon">
-            <img src="{% static 'img/icon_img/Overview.png' %}" alt="">
-          </div>
-          <h5>Real-Time Stock Visibility</h5>
-          <p>Monitor your inventory levels, track stock movements, and get reports.</p>
+          <div class="solution-icon">💳</div>
+          <h5>Accept all local payments</h5>
+          <p>bKash, Nagad, SSLCommerz — all integrated and ready to use from day one.</p>
         </div>
       </div>
       <div class="col-6 col-md-3">
         <div class="solution-card fade-up" style="transition-delay:.3s">
-          <div class="solution-icon">
-            <img src="{% static 'img/icon_img/i4.jpg' %}" alt="">
-          </div>
-          <h5>Easy and Intuitive</h5>
-          <p>Simple interface designed for effortless management.</p>
+          <div class="solution-icon">🚚</div>
+          <h5>Built-in delivery system</h5>
+          <p>Integrated with Steadfast, Pathao and leading Bangladesh courier partners.</p>
         </div>
+      </div>
+    </div>
+    <div class="row g-4 justify-content-center">
+      <div class="col-6 col-md-3">
+        <div class="solution-card fade-up" style="transition-delay:.2s">
+          <div class="solution-icon">📦</div>
+          <h5>Real-Time Stock Visibility</h5>
+          <p>Monitor inventory levels, track stock movements, and get instant reports.</p>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="solution-card fade-up">
+          <div class="solution-icon">🎁</div>
+          <h5>Run offers &amp; coupons</h5>
+          <p>Drive more sales with discounts, promos and smart campaign tools.</p>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="solution-card fade-up" style="transition-delay:.1s">
+          <div class="solution-icon">🔒</div>
+          <h5>Collaborate Securely</h5>
+          <p>Role-based access with protected data sharing for your team.</p>
+        </div>
+      </div>
+      <div class="col-6 col-md-3">
+        <div class="solution-card fade-up" style="transition-delay:.3s">
+          <div class="solution-icon">📊</div>
+          <h5>Track your performance</h5>
+          <p>Real-time analytics to see what's working and what's not in your store.</p>
+        </div>
+      </div>
+    </div>
+
+
+
+    <div class="power-bar fade-up mt-4">Start small → Grow big → Upgrade anytime</div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     HOW IT WORKS
+═══════════════════════════════════════ -->
+<section class="howitworks-section" id="demo">
+  <div class="container text-center">
+    <div class="section-badge">Simple Process</div>
+    <h2 class="section-title">How It Works</h2>
+    <p class="section-sub">Four simple steps from zero to a running online business.</p>
+    <div class="steps-grid mt-4">
+      <div class="step-card fade-up">
+        <div class="step-num">1</div>
+        <h4>Create Your Store</h4>
+        <p>Start with a ready-to-use shop on your subdomain — live in minutes.</p>
+      </div>
+      <div class="step-card fade-up" style="transition-delay:.1s">
+        <div class="step-num">2</div>
+        <h4>Add Products</h4>
+        <p>We help you upload and set up everything. You're never alone in the process.</p>
+      </div>
+      <div class="step-card fade-up" style="transition-delay:.2s">
+        <div class="step-num">3</div>
+        <h4>Get Orders</h4>
+        <p>Start receiving orders from customers on your own branded storefront.</p>
+      </div>
+      <div class="step-card fade-up" style="transition-delay:.3s">
+        <div class="step-num">4</div>
+        <h4>Grow Your Business</h4>
+        <p>Upgrade to your own domain and advanced features as you scale up.</p>
       </div>
     </div>
   </div>
 </section>
 
+
 <!-- EXPLORE OUR AWESOME SYSTEM -->
 <section class="system-section" id="demo_section">
   <div class="container">
     <div class="text-center mb-5">
-      <div class="section-badge">Our System</div>
+      <!-- <div class="section-badge">Our System</div> -->
       <h2 class="section-title">Explore Our Comprehensive System</h2>
     </div>
 
@@ -136,70 +275,61 @@
   </div>
 </section>
 
-<!-- FEATURES -->
-<section class="features-section" id="features_section">
+<!-- ═══════════════════════════════════════
+     FEATURES
+═══════════════════════════════════════ -->
+<section class="features-section" id="features">
   <div class="container text-center">
     <div class="section-badge">Features</div>
-    <h2 class="section-title">Features Built for Your Success</h2>
-    <p class="section-sub mb-5">Engage and Delight Your Customers – Showcase products, manage carts, and create seamless shopping experiences that keep customers coming back.</p>
+    <h2 class="section-title">Features of E-Plex for Your Success</h2>
+    <p class="section-sub mb-5">Showcase products, manage carts, and deliver seamless shopping experiences that keep customers coming back.</p>
     <div class="row g-4">
       <div class="col-md-4">
         <div class="feature-card fade-up">
-          <div class="feature-icon">
-            <img src="{% static 'img/icon_img/i7.jpg' %}" alt="">
-          </div>
+          <div class="feature-icon">🔥</div>
           <h5>Most Popular Items</h5>
-          <p>Discover trending products instantly</p>
+          <p>Discover trending products instantly and boost your best sellers.</p>
         </div>
       </div>
       <div class="col-md-4">
         <div class="feature-card fade-up" style="transition-delay:.1s">
-          <div class="feature-icon">
-            <img src="{% static 'img/icon_img/i8.jpg' %}" alt="">
-          </div>
+          <div class="feature-icon">🎯</div>
           <h5>Just For You</h5>
-          <p>Personalized recommendations for every shopper</p>
+          <p>Personalized recommendations for every shopper based on activity.</p>
         </div>
       </div>
       <div class="col-md-4">
         <div class="feature-card fade-up" style="transition-delay:.2s">
-          <div class="feature-icon">
-            <img src="{% static 'img/icon_img/i9.jpg' %}" alt="">
-          </div>
+          <div class="feature-icon">💡</div>
           <h5>Smart Suggestions</h5>
-          <p>Products optimized for user preferences</p>
+          <p>Products optimized for user preferences to increase average order value.</p>
         </div>
       </div>
       <div class="col-md-4">
         <div class="feature-card fade-up" style="transition-delay:.3s">
-          <div class="feature-icon">
-            <img src="{% static 'img/icon_img/i10.jpg' %}" alt="">
-          </div>
+          <div class="feature-icon">🛒</div>
           <h5>Seamless Checkout</h5>
-          <p>Fast and secure purchase experience</p>
+          <p>Fast and secure purchase experience with all local payment methods.</p>
         </div>
       </div>
       <div class="col-md-4">
         <div class="feature-card fade-up" style="transition-delay:.4s">
-          <div class="feature-icon">
-            <img src="{% static 'img/icon_img/i11.jpg' %}" alt="">
-          </div>
+          <div class="feature-icon">⚡</div>
           <h5>Real-Time Updates</h5>
-          <p>Always show the latest products and offers</p>
+          <p>Always show the latest products and offers — never out of sync.</p>
         </div>
       </div>
       <div class="col-md-4">
         <div class="feature-card fade-up" style="transition-delay:.5s">
-          <div class="feature-icon">
-            <img src="{% static 'img/icon_img/i12.jpg' %}" alt="">
-          </div>
+          <div class="feature-icon">🎪</div>
           <h5>Multiple Campaigns</h5>
-          <p>Run promotions, discounts, and sales easily</p>
+          <p>Run promotions, discounts, and seasonal sales campaigns with ease.</p>
         </div>
       </div>
     </div>
   </div>
 </section>
+
 
 <!-- PAYMENT INTEGRATION -->
 <section class="payment-section">
@@ -252,19 +382,51 @@
   </div>
 </section>
 
-<!-- HOW WE DELIVER HIGH QUALITY WORK -->
-<section class="deliver-section">
+<!-- ═══════════════════════════════════════
+     LOCAL SUPPORT / TRUST
+═══════════════════════════════════════ -->
+<section class="trust-section" style="background:var(--light-bg);">
+  <div class="container text-center">
+    <div class="section-badge">Local Support</div>
+    <h2 class="section-title">We Are With You at Every Step</h2>
+    <p class="section-sub">We understand the Bangladesh market and we're here for you — in Bangla, on WhatsApp, every day.</p>
+    <div class="trust-grid">
+      <div class="trust-card fade-up">
+        <h4>Personal onboarding support</h4>
+        <p>We guide you through your first setup step by step, personally — not a bot.</p>
+      </div>
+      <div class="trust-card fade-up" style="transition-delay:.1s">
+        <h4>WhatsApp reply in 30 minutes</h4>
+        <p>Real humans reply — no bots, no wait queues, no frustration ever.</p>
+      </div>
+      <div class="trust-card fade-up" style="transition-delay:.3s">
+        <h4>Live demo &amp; guidance</h4>
+        <p>See the platform live before committing to anything at all — zero pressure.</p>
+      </div>
+      <div class="trust-card fade-up" style="transition-delay:.4s">
+        <h4>Dedicated success support</h4>
+        <p>We stay with you beyond launch because your success is our success.</p>
+      </div>
+    </div>
+    <p class="trust-line">You are not alone — we help you succeed. ✅</p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     HOW WE DELIVER HIGH QUALITY WORK
+═══════════════════════════════════════ -->
+<!-- <section class="deliver-section">
   <div class="container">
-    <h2 class="text-center">HOW WE DELIVER HIGH QUALITY WORK</h2>
+    <h2>HOW WE DELIVER HIGH QUALITY WORK</h2>
     <div class="row g-5">
       <div class="col-lg-6">
         <div class="deliver-item fade-up">
           <h5>Communicate with customer</h5>
-          <p>We conduct detailed discussions to understand your business requirements, define project scope, and establish clear milestones for successful delivery. </p>
+          <p>We conduct detailed discussions to understand your business requirements, define project scope, and establish clear milestones for successful delivery.</p>
         </div>
         <div class="deliver-item fade-up" style="transition-delay:.15s">
           <h5>Website creation process</h5>
-          <p>Our team designs intuitive interfaces and develops secure, high-performance systems tailored to your operational needs.</p>
+          <p>Our team designs intuitive interfaces and develops secure, high-performance systems tailored to your operational needs and goals.</p>
         </div>
         <div class="deliver-item fade-up" style="transition-delay:.3s">
           <h5>Testing process</h5>
@@ -274,7 +436,7 @@
       <div class="col-lg-6">
         <div class="deliver-right fade-up">
           <h4>Design &amp; Develop</h4>
-          <p style="font-size:.83rem; color:var(--text); margin-bottom:16px;">Before any deployment, every system undergoes rigorous quality assurance procedures including:</p>
+          <p style="font-size:.83rem;color:var(--text);margin-bottom:16px;">Before any deployment, every system undergoes rigorous quality assurance procedures including:</p>
           <ul class="deliver-list">
             <li>Functional testing</li>
             <li>Cross-browser and device compatibility testing</li>
@@ -282,12 +444,53 @@
             <li>Security validation</li>
             <li>User Acceptance Testing (UAT)</li>
           </ul>
-          <p style="font-size:.82rem; color:var(--text); margin-top:16px;">Our QA team ensures the platform succeeds flawlessly under real business conditions before it goes live.</p>
+          <p style="font-size:.82rem;color:var(--text);margin-top:16px;">Our QA team ensures the platform succeeds flawlessly under real business conditions before it goes live.</p>
         </div>
       </div>
     </div>
   </div>
-</section>
+</section> -->
+
+<!-- ═══════════════════════════════════════
+     RESULTS
+═══════════════════════════════════════ -->
+<!-- <section class="results-section">
+  <div class="container text-center">
+    <div class="section-badge">Real Impact</div>
+    <h2 class="section-title">Turn Your Effort Into Real Business Growth</h2>
+    <div class="res-grid">
+      <div class="res-card fade-up">
+        <div class="res-ico">⏱</div>
+        <h4>Save time on orders</h4>
+        <p>Automate order management so you focus on selling, not admin work.</p>
+      </div>
+      <div class="res-card fade-up" style="transition-delay:.1s">
+        <div class="res-ico">🏆</div>
+        <h4>Increase customer trust</h4>
+        <p>A professional store builds credibility Facebook pages simply can't match.</p>
+      </div>
+      <div class="res-card fade-up" style="transition-delay:.2s">
+        <div class="res-ico">🎨</div>
+        <h4>Build your own brand</h4>
+        <p>Own your name, your domain, your customer relationships — permanently.</p>
+      </div>
+      <div class="res-card fade-up" style="transition-delay:.3s">
+        <div class="res-ico">📈</div>
+        <h4>Track sales &amp; performance</h4>
+        <p>Data-driven decisions with real dashboards and live business reports.</p>
+      </div>
+      <div class="res-card fade-up" style="transition-delay:.4s">
+        <div class="res-ico">🚀</div>
+        <h4>Scale beyond Facebook</h4>
+        <p>Reach customers through your store, Google search, and beyond.</p>
+      </div>
+    </div>
+    <p class="res-strong">See real results — not just software.</p>
+  </div>
+</section> -->
+
+
+
 
 <!-- PRICING -->
 <section class="pricing-section" id="pricing_section">
@@ -348,6 +551,114 @@
           <button class="btn-pricing" style="background:var(--primary); color:#fff;">Get Started</button>
         </div>
       </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     UPGRADE PATH / GROWTH PATH
+═══════════════════════════════════════ -->
+<!-- <section class="upgrade-section">
+  <div class="container text-center">
+    <div class="section-badge">Growth Path</div>
+    <h2 class="section-title">Start Simple → Become a Brand</h2>
+    <div class="upg-list">
+      <div class="upg-item fade-up">
+        <div class="upg-num">1</div>
+        <div>
+          <h4>Start with a free/low-cost subdomain</h4>
+          <p>Launch fast without any upfront technical investment or large setup cost.</p>
+        </div>
+      </div>
+      <div class="upg-item fade-up" style="transition-delay:.1s">
+        <div class="upg-num">2</div>
+        <div>
+          <h4>Upgrade to your own domain anytime</h4>
+          <p>Own your brand identity with one simple, affordable upgrade step.</p>
+        </div>
+      </div>
+      <div class="upg-item fade-up" style="transition-delay:.2s">
+        <div class="upg-num">3</div>
+        <div>
+          <h4>Add ERP modules as you grow</h4>
+          <p>Inventory, accounting, HR — connect what your business needs, when it needs it.</p>
+        </div>
+      </div>
+      <div class="upg-item fade-up" style="transition-delay:.3s">
+        <div class="upg-num green">4</div>
+        <div>
+          <h4>Expand into a full digital business</h4>
+          <p>From a Facebook seller to a complete, powerful digital brand with full scale.</p>
+        </div>
+      </div>
+    </div>
+    <p class="core-line">We grow as your business grows.</p>
+  </div>
+</section> -->
+
+<!-- ═══════════════════════════════════════
+     WHY EPLEX
+═══════════════════════════════════════ -->
+<section class="why-section">
+  <div class="container text-center">
+    <div class="section-badge">Why Us</div>
+    <h2 class="section-title">Why Businesses Choose ePlex</h2>
+    <div class="why-grid">
+      <div class="why-card fade-up">
+        <h4>Built for Bangladesh SMEs</h4>
+        <p>Every feature designed with the local market and business culture in mind.</p>
+      </div>
+      <div class="why-card fade-up" style="transition-delay:.1s">
+        <h4>Local payment &amp; courier integration</h4>
+        <p>bKash, Nagad, SSLCommerz, and leading BD couriers — all connected out of the box.</p>
+      </div>
+      <div class="why-card fade-up" style="transition-delay:.2s">
+        <h4>Full onboarding support</h4>
+        <p>We don't hand you software — we set up and launch the entire store with you.</p>
+      </div>
+      <div class="why-card fade-up" style="transition-delay:.3s">
+        <h4>ERP integration (unique advantage)</h4>
+        <p>Connect your store to a full business management system as you scale up.</p>
+      </div>
+      <div class="why-card fade-up" style="transition-delay:.4s">
+        <h4>Affordable pricing</h4>
+        <p>Plans priced fairly for Bangladeshi entrepreneurs, not global corporate budgets.</p>
+      </div>
+      <div class="why-card fade-up" style="transition-delay:.5s">
+        <h4>Growth-focused system</h4>
+        <p>Every single feature built to help you sell more and scale faster.</p>
+      </div>
+    </div>
+    <p class="strong-line">Others give tools — <span>we build your business.</span></p>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════
+     TESTIMONIALS
+═══════════════════════════════════════ -->
+<!-- <section class="testi-section">
+  <div class="container text-center">
+    <div class="section-badge">Testimonials</div>
+    <h2 class="section-title">Real Businesses Growing with ePlex</h2>
+    <div class="social-ph fade-up">
+      <p style="font-size:28px;margin-bottom:10px;">⭐⭐⭐⭐⭐</p>
+      <p>Client stories, results, and screenshots coming soon.</p>
+      <p class="sub-note">Be among the first to share your ePlex success story.</p>
+    </div>
+  </div>
+</section> -->
+
+<!-- ═══════════════════════════════════════
+     FINAL CTA
+═══════════════════════════════════════ -->
+<section class="final-cta">
+  <div class="final-cta-inner">
+    <span class="section-badge">Get Started Today</span>
+    <h2>Ready to Start Your Online Business?</h2>
+    <p>Get a free demo and see how ePlex can help you launch and grow — starting today. No commitment required.</p>
+    <div class="final-btns">
+      <a href="#" class="btn-cta-white"><i class="bi bi-rocket-takeoff"></i> Book Free Demo</a>
+      <a href="https://wa.me/880" class="btn-cta-outline"><i class="fab fa-whatsapp"></i> WhatsApp Now</a>
     </div>
   </div>
 </section>
