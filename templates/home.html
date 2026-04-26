@@ -22,30 +22,39 @@
     <div class="row g-4 justify-content-center">
       <div class="col-6 col-md-3">
         <div class="solution-card fade-up">
-          <div class="solution-icon"><i class="fas fa-chart-line"></i></div>
+          {% comment %} <div class="solution-icon"><i class="fas fa-chart-line"></i></div> {% endcomment %}
+          <div class="solution-icon">
+            <img src="{% static 'img/icon_img/i1_Store_Mnagement.jpg' %}" alt="">
+          </div>
           <h5>Streamlined Store Management</h5>
           <p>Manage products, orders, and customers from one simple dashboard.</p>
         </div>
       </div>
       <div class="col-6 col-md-3">
         <div class="solution-card fade-up" style="transition-delay:.1s">
-          <div class="solution-icon"><i class="fas fa-handshake"></i></div>
-          <h5>Collaborate easily</h5>
-          <p>Work seamlessly with your team and manage operations efficiently.</p>
+          <div class="solution-icon">
+            <img src="{% static 'img/icon_img/i2_collaborate_Securely.jpg' %}" alt="">
+          </div>
+          <h5>Collaborate Securely</h5>
+          <p>Role-based access with protected data sharing.</p>
         </div>
       </div>
       <div class="col-6 col-md-3">
         <div class="solution-card fade-up" style="transition-delay:.2s">
-          <div class="solution-icon"><i class="fas fa-sliders-h"></i></div>
-          <h5>Unilateral solutions</h5>
-          <p>Customise every aspect of your store from a single dashboard.</p>
+          <div class="solution-icon">
+            <img src="{% static 'img/icon_img/Overview.png' %}" alt="">
+          </div>
+          <h5>Real-Time Stock Visibility</h5>
+          <p>Monitor your inventory levels, track stock movements, and get reports.</p>
         </div>
       </div>
       <div class="col-6 col-md-3">
         <div class="solution-card fade-up" style="transition-delay:.3s">
-          <div class="solution-icon"><i class="fas fa-rocket"></i></div>
+          <div class="solution-icon">
+            <img src="{% static 'img/icon_img/i4.jpg' %}" alt="">
+          </div>
           <h5>Easy and Intuitive</h5>
-          <p>Simple, user-friendly tools designed for non-technical entrepreneurs.</p>
+          <p>Simple interface designed for effortless management.</p>
         </div>
       </div>
     </div>
@@ -57,46 +66,37 @@
   <div class="container">
     <div class="text-center mb-5">
       <div class="section-badge">Our System</div>
-      <h2 class="section-title">Explore our awesome system</h2>
+      <h2 class="section-title">Explore Our Comprehensive System</h2>
     </div>
 
     <!-- User Side Demo -->
     <div class="row align-items-center g-5 mb-5">
       <div class="col-lg-5">
         <p class="demo-label">User Side Demo</p>
-        <p class="demo-text">The ePlex demo presents a complete E-Commerce management system, focused on creating a seamless experience for your customers and administrators.</p>
+        <p class="demo-text">The User Demo showcases a complete front-end shopping experience. Explore product browsing, personalized recommendations based on user activity, effortless order placement and secure checkout, profile and account management, order tracking, and a comprehensive user dashboard — all within an intuitive and engaging interface designed for seamless online shopping.</p>
         <div class="demo-feature">
-          <div class="demo-feature-icon"><i class="fas fa-tags"></i></div>
+          <div class="demo-feature-icon">
+            <img src="{% static 'img/icon_img/i5.jpg' %}" alt="">
+          </div>
           <div>
             <h6>Personalized User Console</h6>
             <p>Complete Control at your fingertips</p>
           </div>
         </div>
         <div class="demo-feature">
-          <div class="demo-feature-icon"><i class="fas fa-sync-alt"></i></div>
+          <div class="demo-feature-icon">
+            <img src="{% static 'img/icon_img/i6.jpg' %}" alt="">
+          </div>
           <div>
             <h6>Always in Sync</h6>
             <p>Real-time update across orders and inventory.</p>
           </div>
         </div>
-        <a href="#" class="btn-common-all mt-2" style="display:inline-block; text-decoration:none; font-size:.85rem;">Try it out Free <i class="bi bi-arrow-right"></i></a>
+        <a href="#" class="btn-common-all mt-2" style="display:inline-block; text-decoration:none; font-size:.85rem;">Live Preview <i class="bi bi-arrow-right"></i></a>
       </div>
       <div class="col-lg-7">
         <div class="demo-mockup fade-up">
-          <div class="mockup-bar">
-            <div class="mockup-dot"></div><div class="mockup-dot"></div><div class="mockup-dot"></div>
-            <div style="flex:1; background:rgba(255,255,255,.2); height:20px; border-radius:6px; margin-left:10px;"></div>
-          </div>
-          <div class="mockup-content">
-            <div class="mockup-row short"></div>
-            <div class="mockup-row shorter"></div>
-            <div class="mockup-grid">
-              <div class="mockup-card-mini" style="background:linear-gradient(135deg,#e8f7fd,#cceefb);"></div>
-              <div class="mockup-card-mini" style="background:linear-gradient(135deg,#fef3c7,#fde68a);"></div>
-              <div class="mockup-card-mini" style="background:linear-gradient(135deg,#d1fae5,#a7f3d0);"></div>
-              <div class="mockup-card-mini" style="background:linear-gradient(135deg,#fce7f3,#fbcfe8);"></div>
-            </div>
-          </div>
+          <img src="{% static 'img/user_demo.png' %}" alt="">
         </div>
       </div>
     </div>
@@ -107,43 +107,28 @@
         <p class="demo-label">Admin Side Demo</p>
         <p class="demo-text">The Admin Demo presents the complete back-office management system. Explore product creation, category and variant management, discount configuration, order processing workflows, customer management, reporting tools, and system settings — all within a centralized and user-friendly control panel.</p>
         <div class="demo-feature">
-          <div class="demo-feature-icon"><i class="fas fa-tachometer-alt"></i></div>
+          <div class="demo-feature-icon">
+            <img src="{% static 'img/icon_img/i6.jpg' %}" alt="">
+          </div>
           <div>
             <h6>Powerful Dashboard</h6>
-            <p>Comprehensive insights and controls at your fingertips.</p>
+            <p>Combine multiple reports into a single beautiful dashboard</p>
           </div>
         </div>
         <div class="demo-feature">
-          <div class="demo-feature-icon"><i class="fas fa-clock"></i></div>
+          <div class="demo-feature-icon">
+            <img src="{% static 'img/icon_img/i5.jpg' %}" alt="">
+          </div>
           <div>
             <h6>Always in Sync</h6>
-            <p>Dont't worry about the data always be synchronized</p>
+            <p>Don’t worry about the data, always be synchronized</p>
           </div>
         </div>
-        <a href="#" class="btn-common-all mt-2" style="display:inline-block; text-decoration:none; font-size:.85rem;"><i class="bi bi-arrow-left"></i> Try it out Free</a>
+        <a href="#" class="btn-common-all mt-2" style="display:inline-block; text-decoration:none; font-size:.85rem;"><i class="bi bi-arrow-left"></i> Live Preview</a>
       </div>
       <div class="col-lg-7">
         <div class="demo-mockup fade-up" style="background:#1a2e44;">
-          <div class="mockup-bar" style="background:#0fa3e3;">
-            <div class="mockup-dot"></div><div class="mockup-dot"></div><div class="mockup-dot"></div>
-          </div>
-          <div class="mockup-content" style="display:flex; gap:12px;">
-            <div style="width:70px; background:rgba(255,255,255,.07); border-radius:8px; padding:12px;">
-              <div style="width:100%; height:8px; background:rgba(255,255,255,.15); border-radius:4px; margin-bottom:8px;"></div>
-              <div style="width:80%; height:8px; background:rgba(255,255,255,.1); border-radius:4px; margin-bottom:8px;"></div>
-              <div style="width:90%; height:8px; background:rgba(255,255,255,.1); border-radius:4px; margin-bottom:8px;"></div>
-              <div style="width:70%; height:8px; background:var(--primary); border-radius:4px;"></div>
-            </div>
-            <div style="flex:1;">
-              <div class="mockup-row" style="background:rgba(255,255,255,.1);"></div>
-              <div class="mockup-row shorter" style="background:rgba(255,255,255,.07);"></div>
-              <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:8px; margin-top:14px;">
-                <div style="background:rgba(43,190,249,.2); border-radius:8px; height:50px;"></div>
-                <div style="background:rgba(255,255,255,.08); border-radius:8px; height:50px;"></div>
-                <div style="background:rgba(255,107,53,.2); border-radius:8px; height:50px;"></div>
-              </div>
-            </div>
-          </div>
+          <img src="{% static 'img/admin_demo.png' %}" alt="">
         </div>
       </div>
     </div>
@@ -154,49 +139,61 @@
 <section class="features-section" id="features_section">
   <div class="container text-center">
     <div class="section-badge">Features</div>
-    <h2 class="section-title">Explore our awesome features</h2>
+    <h2 class="section-title">Features Built for Your Success</h2>
     <p class="section-sub mb-5">Engage and Delight Your Customers – Showcase products, manage carts, and create seamless shopping experiences that keep customers coming back.</p>
     <div class="row g-4">
       <div class="col-md-4">
         <div class="feature-card fade-up">
-          <div class="feature-icon"><i class="fas fa-fire"></i></div>
+          <div class="feature-icon">
+            <img src="{% static 'img/icon_img/i7.jpg' %}" alt="">
+          </div>
           <h5>Most Popular Items</h5>
-          <p>Discover trending and best-selling products in your store.</p>
+          <p>Discover trending products instantly</p>
         </div>
       </div>
       <div class="col-md-4">
         <div class="feature-card fade-up" style="transition-delay:.1s">
-          <div class="feature-icon"><i class="fas fa-user-circle"></i></div>
+          <div class="feature-icon">
+            <img src="{% static 'img/icon_img/i8.jpg' %}" alt="">
+          </div>
           <h5>Just For You</h5>
-          <p>AI-powered personalised recommendations for each individual shopper.</p>
+          <p>Personalized recommendations for every shopper</p>
         </div>
       </div>
       <div class="col-md-4">
         <div class="feature-card fade-up" style="transition-delay:.2s">
-          <div class="feature-icon"><i class="fas fa-headset"></i></div>
+          <div class="feature-icon">
+            <img src="{% static 'img/icon_img/i9.jpg' %}" alt="">
+          </div>
           <h5>Smart Suggestions</h5>
-          <p>Intelligent upsell and cross-sell prompts to increase basket size.</p>
+          <p>Products optimized for user preferences</p>
         </div>
       </div>
       <div class="col-md-4">
         <div class="feature-card fade-up" style="transition-delay:.3s">
-          <div class="feature-icon"><i class="fas fa-download"></i></div>
+          <div class="feature-icon">
+            <img src="{% static 'img/icon_img/i10.jpg' %}" alt="">
+          </div>
           <h5>Seamless Checkout</h5>
-          <p>Fast, frictionless checkout experience to reduce cart abandonment.</p>
+          <p>Fast and secure purchase experience</p>
         </div>
       </div>
       <div class="col-md-4">
         <div class="feature-card fade-up" style="transition-delay:.4s">
-          <div class="feature-icon"><i class="fas fa-bolt"></i></div>
+          <div class="feature-icon">
+            <img src="{% static 'img/icon_img/i11.jpg' %}" alt="">
+          </div>
           <h5>Real-Time Updates</h5>
-          <p>Stay informed with live inventory and order status notifications.</p>
+          <p>Always show the latest products and offers</p>
         </div>
       </div>
       <div class="col-md-4">
         <div class="feature-card fade-up" style="transition-delay:.5s">
-          <div class="feature-icon"><i class="fas fa-bullhorn"></i></div>
+          <div class="feature-icon">
+            <img src="{% static 'img/icon_img/i12.jpg' %}" alt="">
+          </div>
           <h5>Multiple Campaigns</h5>
-          <p>Run unlimited promotions, coupons, and referral programmes simultaneously.</p>
+          <p>Run promotions, discounts, and sales easily</p>
         </div>
       </div>
     </div>
@@ -262,15 +259,15 @@
       <div class="col-lg-6">
         <div class="deliver-item fade-up">
           <h5>Communicate with customer</h5>
-          <p>We carefully understand your requirements, gather key business objectives, and establish clear milestones for every project phase.</p>
+          <p>We conduct detailed discussions to understand your business requirements, define project scope, and establish clear milestones for successful delivery. </p>
         </div>
         <div class="deliver-item fade-up" style="transition-delay:.15s">
           <h5>Website creation process</h5>
-          <p>Our designers and developers collaborate to bring your vision to life, optimising every aspect of the user experience.</p>
+          <p>Our team designs intuitive interfaces and develops secure, high-performance systems tailored to your operational needs.</p>
         </div>
         <div class="deliver-item fade-up" style="transition-delay:.3s">
           <h5>Testing process</h5>
-          <p>From unit testing to full integration testing, our development process is transparent, methodical, and reliable.</p>
+          <p>From planning and feature integration to system configuration, we follow a systematic development process to ensure efficiency and transparency.</p>
         </div>
       </div>
       <div class="col-lg-6">
@@ -294,9 +291,9 @@
 <!-- PRICING -->
 <section class="pricing-section" id="pricing_section">
   <div class="container text-center">
-    <div class="section-badge">Pricing</div>
+    <div class="section-badge">Our Pricing</div>
     <h2 class="section-title">Choose the plan that's right<br/>for your business</h2>
-    <p class="section-sub mb-4">Start with the free plan — upgrade whenever you're ready to scale.</p>
+    <p class="section-sub mb-4">Start with the Free plan to try out our platform  for an unlimited period of time</p>
     <div class="pricing-toggle">
       <span class="toggle-label">Monthly</span>
       <div class="form-check form-switch m-0">
@@ -325,7 +322,7 @@
           <p class="price-label">Start with</p>
           <div class="price-amount" style="color:#fff;"><span>$</span>99</div>
           <span class="price-period">/ month</span>
-          <h3>Business</h3>
+          <h3>Essentials</h3>
           <p style="font-size:.8rem; color:rgba(255,255,255,.8);">Better for growing businesses that want more customers.</p>
           <hr class="pricing-divider"/>
           <div class="pricing-feature"><i class="fas fa-check-circle"></i> Unlimited project use</div>
@@ -340,7 +337,7 @@
           <p class="price-label">Start with</p>
           <div class="price-amount"><span>$</span>159</div>
           <span class="price-period">/ month</span>
-          <h3>Enterprise</h3>
+          <h3>Premium</h3>
           <p style="font-size:.8rem; color:var(--text);">Advanced features for pros who need more customization.</p>
           <hr class="pricing-divider"/>
           <div class="pricing-feature"><i class="fas fa-check-circle"></i> Custom integrations</div>
