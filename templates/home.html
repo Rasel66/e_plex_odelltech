@@ -14,7 +14,7 @@
 <!-- ═══════════════════════════════════════
      HERO
 ═══════════════════════════════════════ -->
-<section class="hero" id="hero">
+{% comment %} <section class="hero" id="hero">
   <div class="container hero-inner">
     <div class="hero-badge-pill">
       <span class="badge-live"></span>
@@ -27,25 +27,67 @@
       <a href="#" class="btn-cta-white"><i class="bi bi-rocket-takeoff"></i> Book Free Demo</a>
       <a href="https://wa.me/880" class="btn-cta-outline"><i class="fab fa-whatsapp"></i> WhatsApp Now</a>
     </div>
-    {% comment %} <div class="hero-stats">
-      <div class="hero-stat">
-        <div class="stat-num">100+</div>
-        <div class="stat-label">Active Stores</div>
-      </div>
-      <div class="hero-stat">
-        <div class="stat-num">30 min</div>
-        <div class="stat-label">WhatsApp Response</div>
-      </div>
-      <div class="hero-stat">
-        <div class="stat-num">SteadFast</div>
-        <div class="stat-label">Local Delivery Stytem</div>
-      </div>
-      <div class="hero-stat">
-        <div class="stat-num">ERP</div>
-        <div class="stat-label">Integration Ready</div>
-      </div>
-    </div> {% endcomment %}
   </div>
+</section> {% endcomment %}
+
+<section class="hero-carousel" id="hero">
+
+  <!-- SLIDE 1 — Launch your store -->
+  <div class="slide active">
+    <div class="slide-bg" style="background-image:url('{% static 'img/hero_5.jpeg' %}');"></div>
+    <div class="slide-content">
+      <div class="hero-badge-pill"><span class="badge-live"></span> Bangladesh's #1 Ecommerce Platform for SMEs</div>
+      <h1>Start Your Online Business <br> Easily and <span style="color: purple;">Grow It into a <br> Brand</span></h1>
+      <p class="hero-sub">Launch your own ecommerce website in minutes with full support<br>
+        <span style="color:black;">— no technical skills needed.</span></p>
+      <p class="hero-support"><i class="fas fa-check-circle"></i> We don't just give you software. We help you sell, grow, and succeed.</p>
+      <div class="final-btns">
+        <a href="{% url 'get_started_url' %}" class="btn-cta-white"><i class="bi bi-rocket-takeoff"></i> Book Free Demo</a>
+        <a href="https://wa.me/880" class="btn-cta-outline"><i class="fab fa-whatsapp"></i> WhatsApp Now</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 2 — Payments -->
+  <div class="slide">
+    <div class="slide-bg" style="background-image:url('{% static 'img/hero_6.jpeg' %}');"></div>
+    <div class="slide-content">
+      <div class="hero-badge-pill"><span class="badge-live"></span> Bangladesh's #1 Ecommerce Platform for SMEs</div>
+      <h1>Start Your Online Business <br> Easily and <span style="color: purple;">Grow It into a <br> Brand</span></h1>
+      <p class="hero-sub">Launch your own ecommerce website in minutes with full support<br>
+        <span style="color:black;">— no technical skills needed.</span></p>
+      <p class="hero-support"><i class="fas fa-check-circle"></i> We don't just give you software. We help you sell, grow, and succeed.</p>
+      <div class="final-btns">
+        <a href="{% url 'get_started_url' %}" class="btn-cta-white"><i class="bi bi-rocket-takeoff"></i> Book Free Demo</a>
+        <a href="https://wa.me/880" class="btn-cta-outline"><i class="fab fa-whatsapp"></i> WhatsApp Now</a>
+      </div>
+    </div>
+  </div>
+
+  <!-- SLIDE 3 — Scale beyond Facebook -->
+  <div class="slide">
+    <div class="slide-bg" style="background-image:url('{% static 'img/hero_4.jpeg' %}');"></div>
+    <div class="slide-content">
+      <div class="hero-badge-pill"><span class="badge-live"></span> Bangladesh's #1 Ecommerce Platform for SMEs</div>
+      <h1>Start Your Online Business <br> Easily and <span style="color: purple;">Grow It into a <br> Brand</span></h1>
+      <p class="hero-sub">Launch your own ecommerce website in minutes with full support<br>
+        <span style="color: black;">— no technical skills needed.</span></p>
+      <p class="hero-support"><i class="fas fa-check-circle"></i> We don't just give you software. We help you sell, grow, and succeed.</p>
+      <div class="final-btns">
+        <a href="{% url 'get_started_url' %}" class="btn-cta-white"><i class="bi bi-rocket-takeoff"></i> Book Free Demo</a>
+        <a href="https://wa.me/880" class="btn-cta-outline"><i class="fab fa-whatsapp"></i> WhatsApp Now</a>
+      </div>
+    </div>
+  </div>
+
+  <button class="carousel-arrow prev" id="heroPrev">&#8249;</button>
+  <button class="carousel-arrow next" id="heroNext">&#8250;</button>
+  <div class="carousel-dots" id="heroDots">
+    <button class="cdot active"></button>
+    <button class="cdot"></button>
+    <button class="cdot"></button>
+  </div>
+  <div class="carousel-progress" id="heroProgress"></div>
 </section>
 
 
@@ -166,39 +208,6 @@
   </div>
 </section>
 
-<!-- ═══════════════════════════════════════
-     HOW IT WORKS
-═══════════════════════════════════════ -->
-<section class="howitworks-section" id="demo">
-  <div class="container text-center">
-    <div class="section-badge">Simple Process</div>
-    <h2 class="section-title">How It Works</h2>
-    <p class="section-sub">Four simple steps from zero to a running online business.</p>
-    <div class="steps-grid mt-4">
-      <div class="step-card fade-up">
-        <div class="step-num">1</div>
-        <h4>Create Your Store</h4>
-        <p>Start with a ready-to-use shop on your subdomain — live in minutes.</p>
-      </div>
-      <div class="step-card fade-up" style="transition-delay:.1s">
-        <div class="step-num">2</div>
-        <h4>Add Products</h4>
-        <p>We help you upload and set up everything. You're never alone in the process.</p>
-      </div>
-      <div class="step-card fade-up" style="transition-delay:.2s">
-        <div class="step-num">3</div>
-        <h4>Get Orders</h4>
-        <p>Start receiving orders from customers on your own branded storefront.</p>
-      </div>
-      <div class="step-card fade-up" style="transition-delay:.3s">
-        <div class="step-num">4</div>
-        <h4>Grow Your Business</h4>
-        <p>Upgrade to your own domain and advanced features as you scale up.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
 
 <!-- EXPLORE OUR AWESOME SYSTEM -->
 <section class="system-section" id="demo_section">
@@ -276,6 +285,40 @@
 </section>
 
 <!-- ═══════════════════════════════════════
+     HOW IT WORKS
+═══════════════════════════════════════ -->
+<section class="howitworks-section" id="demo">
+  <div class="container text-center">
+    <div class="section-badge">Simple Process</div>
+    <h2 class="section-title">How It Works</h2>
+    <p class="section-sub">Four simple steps from zero to a running online business.</p>
+    <div class="steps-grid mt-4">
+      <div class="step-card fade-up">
+        <div class="step-num">1</div>
+        <h4>Create Your Store</h4>
+        <p>Start with a ready-to-use shop on your subdomain — live in minutes.</p>
+      </div>
+      <div class="step-card fade-up" style="transition-delay:.1s">
+        <div class="step-num">2</div>
+        <h4>Add Products</h4>
+        <p>We help you upload and set up everything. You're never alone in the process.</p>
+      </div>
+      <div class="step-card fade-up" style="transition-delay:.2s">
+        <div class="step-num">3</div>
+        <h4>Get Orders</h4>
+        <p>Start receiving orders from customers on your own branded storefront.</p>
+      </div>
+      <div class="step-card fade-up" style="transition-delay:.3s">
+        <div class="step-num">4</div>
+        <h4>Grow Your Business</h4>
+        <p>Upgrade to your own domain and advanced features as you scale up.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════
      FEATURES
 ═══════════════════════════════════════ -->
 <section class="features-section" id="features">
@@ -332,6 +375,7 @@
 
 
 <!-- PAYMENT INTEGRATION -->
+{% comment %} <section class="payment-section" style="background-image:url('{% static 'img/payment_systems.jpg' %}');"> {% endcomment %}
 <section class="payment-section">
   <div class="container">
     <div class="row align-items-center g-5">
