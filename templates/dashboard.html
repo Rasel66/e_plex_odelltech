@@ -1,0 +1,413 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        {% block title %}E-Plex – Dashboard{% endblock %}
+    </title>
+    <link rel="icon" type="image/png" href="{% static 'img/e_plex_logo.png' %}">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}"/>
+
+</head>
+<body>
+    <div class="shell">
+
+    <!-- ══ SIDEBAR ══ -->
+    <aside class="sidebar" id="sidebar">
+
+        <div class="sidebar-header">
+            <div class="logo-mark">E</div>
+                <span class="logo-text">E-Plex</span>
+            </div>
+
+        <div class="sidebar-body">
+            <div class="nav-section">
+                <div class="nav-section-title">Overview</div>
+
+                <a class="nav-item active" href="#" data-page="Dashboard">
+                    <span class="nav-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></span>
+                    <span class="nav-label">Dashboard</span>
+                </a>
+
+                <div class="nav-item has-sub" data-parent="Analytics">
+                    <span class="nav-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></span>
+                    <span class="nav-label">Analytics</span>
+                    <span class="chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span>
+                </div>
+                <div class="submenu" id="sub-analytics">
+                    <a class="sub-item active" href="#">Overview</a>
+                    <a class="sub-item" href="#">Traffic Sources</a>
+                    <a class="sub-item" href="#">Conversions</a>
+                    <a class="sub-item" href="#">Funnels</a>
+                </div>
+
+                {% comment %} <div class="nav-item has-sub" data-parent="Reports">
+                    <span class="nav-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></span>
+                    <span class="nav-label">Reports</span>
+                    <span class="badge">3</span>
+                    <span class="chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span>
+                </div>
+                <div class="submenu" id="sub-reports">
+                    <a class="sub-item" href="#">Monthly Summary</a>
+                    <a class="sub-item" href="#">Sales Report</a>
+                    <a class="sub-item" href="#">User Activity <span class="sub-badge">2</span></a>
+                    <a class="sub-item" href="#">Custom Report</a>
+                </div> {% endcomment %}
+            </div>
+
+            {% comment %} <div class="nav-section">
+                <div class="nav-section-title">Manage</div>
+
+                <div class="nav-item has-sub" data-parent="Users">
+                <span class="nav-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
+                <span class="nav-label">Users</span>
+                <span class="badge">128</span>
+                <span class="chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span>
+                </div>
+                <div class="submenu" id="sub-users">
+                <a class="sub-item" href="#">All Users</a>
+                <a class="sub-item" href="#">Roles &amp; Permissions</a>
+                <a class="sub-item" href="#">Invitations</a>
+                <a class="sub-item" href="#">Activity Log</a>
+                </div>
+
+                <a class="nav-item" href="#" data-page="Products">
+                <span class="nav-icon"><svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></span>
+                <span class="nav-label">Products</span>
+                </a>
+
+                <div class="nav-item has-sub" data-parent="Billing">
+                <span class="nav-icon"><svg viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg></span>
+                <span class="nav-label">Billing</span>
+                <span class="chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span>
+                </div>
+                <div class="submenu" id="sub-billing">
+                <a class="sub-item" href="#">Subscriptions</a>
+                <a class="sub-item" href="#">Invoices</a>
+                <a class="sub-item" href="#">Payment Methods</a>
+                </div>
+
+                <a class="nav-item" href="#" data-page="Transactions">
+                <span class="nav-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></span>
+                <span class="nav-label">Transactions</span>
+                <span class="badge rose">12</span>
+                </a>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">System</div>
+
+                <a class="nav-item" href="#" data-page="Messages">
+                <span class="nav-icon"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></span>
+                <span class="nav-label">Messages</span>
+                </a>
+
+                <a class="nav-item" href="#" data-page="Integrations">
+                <span class="nav-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg></span>
+                <span class="nav-label">Integrations</span>
+                </a>
+
+                <div class="nav-item has-sub" data-parent="Settings">
+                <span class="nav-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></span>
+                <span class="nav-label">Settings</span>
+                <span class="chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span>
+                </div>
+                <div class="submenu" id="sub-settings">
+                <a class="sub-item" href="#">General</a>
+                <a class="sub-item" href="#">Security</a>
+                <a class="sub-item" href="#">Notifications</a>
+                <a class="sub-item" href="#">API Keys</a>
+                <a class="sub-item" href="#">Appearance</a>
+                </div>
+            </div> {% endcomment %}
+
+        </div>
+
+        <div class="sidebar-footer">
+            <div class="user-row">
+                <div class="avatar">
+                    {% if profile.image %}
+                        <img src="{{ profile.image.url }}" alt="Avatar">
+                    {% else %}
+                        <div class="avatar-placeholder">{{ profile.user.username|first|upper }}</div>
+                    {% endif %}
+                </div>
+                <div class="sidebar-footer-text">
+                    <strong>{{ user.username }}</strong>
+                    <span>{{ user.email }}</span>
+                </div>
+            </div>
+        </div>
+    </aside>
+
+    <div class="sidebar-overlay" id="overlay" onclick="closeMobile()"></div>
+
+    <!-- ══ MAIN ══ -->
+    <div class="main">
+
+        <header class="topbar">
+        <button class="topbar-toggle" onclick="toggleSidebar()" aria-label="Toggle sidebar">
+            <svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+        <button class="mobile-menu-btn" onclick="openMobile()" aria-label="Menu">
+            <svg viewBox="0 0 24 24"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+        </button>
+
+        <div class="breadcrumb">
+            Home
+            <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+            <span id="bcPage">Dashboard</span>
+        </div>
+
+        {% comment %} <div class="search-bar">
+            <span class="search-icon"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg></span>
+            <input type="text" placeholder="Search anything…">
+        </div> {% endcomment %}
+
+        <div class="topbar-actions">
+            {% comment %} <button class="topbar-btn" aria-label="Notifications">
+                <svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
+                <span class="notif-dot"></span>
+            </button>
+            <button class="topbar-btn" aria-label="Help">
+                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            </button> {% endcomment %}
+
+            <!-- Avatar + dropdown -->
+            <div class="avatar-menu" id="avatarMenu">
+                <div class="topbar-avatar" id="avatarBtn" onclick="toggleAvatarMenu(event)">
+                    {% if profile.image %}
+                        <img src="{{ profile.image.url }}" alt="Avatar">
+                    {% else %}
+                        <div class="avatar-placeholder">{{ user.username|first|upper }}</div>
+                    {% endif %}
+                </div>
+
+                <div class="avatar-dropdown" id="avatarDropdown">
+                <div class="avatar-dropdown-header">
+                    <div class="avatar-drop-icon">
+                        {% if profile.image %}
+                            <img src="{{ profile.image.url }}" alt="Avatar">
+                        {% else %}
+                            <div class="avatar-placeholder">{{ user.username|first|upper }}</div>
+                        {% endif %}
+                    </div>
+                    <div>
+                    <div class="avatar-drop-name">{{ user.username }}</div>
+                    <div class="avatar-drop-email">{{ user.email }}</div>
+                    </div>
+                </div>
+                <div class="avatar-dropdown-divider"></div>
+                    <a href="{% url 'home_page_url' %}" class="avatar-dropdown-item" onclick="closeAvatarMenu()">
+                        <i class="bi bi-house"></i>
+                        Home
+                    </a>
+                    <a href="" class="avatar-dropdown-item danger" onclick="closeAvatarMenu()">
+                        <form method="post" action="{% url 'logout_url' %}">
+                            {% csrf_token %}
+                            <button type="submit" class="dropdown-item text-danger">
+                                <i class="bi bi-box-arrow-right me-2"></i> Sign Out
+                            </button>
+                        </form>
+                    </a>
+                </div>
+            </div>
+            </div>
+        </header>
+
+        <main class="page">
+        <div class="page-header">
+            <h1>Hello, {{user.username}} ☀️</h1>
+            <p>Here's what's happening across your workspace today.</p>
+        </div>
+
+        <div class="stats-grid">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="stat-card">
+                        <div class="stat-top"><span class="stat-label">Total Tickets</span><div class="stat-icon si-blue"><i class="bi bi-ticket"></i></div></div>
+                        <div class="stat-value">10</div>
+                    </div>
+                </div>
+            </div>
+            
+            {% comment %} <div class="stat-card">
+            <div class="stat-top"><span class="stat-label">Active Users</span><div class="stat-icon si-teal"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></div></div>
+            <div class="stat-value">3,482</div>
+            <div class="stat-change up"><svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg>+8.1% from last month</div>
+            </div>
+            <div class="stat-card">
+            <div class="stat-top"><span class="stat-label">New Orders</span><div class="stat-icon si-amber"><svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/></svg></div></div>
+            <div class="stat-value">1,247</div>
+            <div class="stat-change down"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>-3.2% from last month</div>
+            </div>
+            <div class="stat-card">
+            <div class="stat-top"><span class="stat-label">Churn Rate</span><div class="stat-icon si-rose"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div></div>
+            <div class="stat-value">2.8%</div>
+            <div class="stat-change up"><svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg>-0.4% improvement</div>
+            </div> {% endcomment %}
+        </div>
+
+        {% comment %} <div class="content-row">
+            <div class="card">
+            <div class="card-header">
+                <div><div class="card-title">Revenue Overview</div><div class="card-subtitle">Monthly comparison — 2024 vs 2025</div></div>
+                <button class="card-action">Export</button>
+            </div>
+            <div class="card-body">
+                <div class="chart-bars" id="chartBars"></div>
+                <div class="chart-legend">
+                <div class="legend-item"><div class="legend-dot" style="background:var(--accent)"></div>2025</div>
+                <div class="legend-item"><div class="legend-dot" style="background:#a5d8cc"></div>2024</div>
+                </div>
+            </div>
+            </div>
+
+            <div class="card">
+            <div class="card-header"><div><div class="card-title">Recent Activity</div><div class="card-subtitle">Last 24 hours</div></div></div>
+            <div class="card-body" style="padding-top:8px;padding-bottom:8px;">
+                <div class="activity-list">
+                <div class="activity-item"><div class="activity-icon si-blue"><svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg></div><div class="activity-info"><div class="activity-text"><strong>Sara Chen</strong> joined as Admin</div><div class="activity-time">2 min ago</div></div></div>
+                <div class="activity-item"><div class="activity-icon si-teal"><svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/></svg></div><div class="activity-info"><div class="activity-text">Order <strong>#4821</strong> fulfilled</div><div class="activity-time">18 min ago</div></div></div>
+                <div class="activity-item"><div class="activity-icon si-amber"><svg viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg></div><div class="activity-info"><div class="activity-text">Payment of <strong>$1,420</strong> received</div><div class="activity-time">45 min ago</div></div></div>
+                <div class="activity-item"><div class="activity-icon si-rose"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg></div><div class="activity-info"><div class="activity-text">Server load exceeded <strong>80%</strong></div><div class="activity-time">1 hr ago</div></div></div>
+                <div class="activity-item"><div class="activity-icon" style="background:var(--green-dim);color:var(--green)"><svg viewBox="0 0 24 24"><polyline points="20 6 9 17 4 12"/></svg></div><div class="activity-info"><div class="activity-text">Deployment <strong>v2.4.1</strong> succeeded</div><div class="activity-time">3 hr ago</div></div></div>
+                </div>
+            </div>
+            </div>
+        </div>
+
+        <div class="card table-card">
+            <div class="card-header"><div><div class="card-title">Top Users</div><div class="card-subtitle">Sorted by usage this month</div></div><button class="card-action">View all</button></div>
+            <div class="table-wrap">
+            <table>
+                <colgroup><col style="width:220px"><col style="width:150px"><col style="width:110px"><col style="width:170px"><col style="width:90px"></colgroup>
+                <thead><tr><th>User</th><th>Role</th><th>Status</th><th>Usage</th><th>Joined</th></tr></thead>
+                <tbody>
+                <tr><td><div class="td-name"><div class="td-avatar" style="background:#4a6cf7">MR</div><span class="td-name-text">Maya Rodriguez</span></div></td><td>Product Lead</td><td><span class="status-pill active">Active</span></td><td><div class="progress-bar-wrap"><div class="progress-bar"><div class="progress-fill" style="width:92%"></div></div><span class="progress-pct">92%</span></div></td><td>Jan 2024</td></tr>
+                <tr><td><div class="td-name"><div class="td-avatar" style="background:#0eaf8a">JL</div><span class="td-name-text">Jordan Lee</span></div></td><td>Engineer</td><td><span class="status-pill active">Active</span></td><td><div class="progress-bar-wrap"><div class="progress-bar"><div class="progress-fill teal" style="width:78%"></div></div><span class="progress-pct">78%</span></div></td><td>Mar 2024</td></tr>
+                <tr><td><div class="td-name"><div class="td-avatar" style="background:#d97706">TP</div><span class="td-name-text">Taylor Park</span></div></td><td>Designer</td><td><span class="status-pill pending">Pending</span></td><td><div class="progress-bar-wrap"><div class="progress-bar"><div class="progress-fill amber" style="width:61%"></div></div><span class="progress-pct">61%</span></div></td><td>Jun 2024</td></tr>
+                <tr><td><div class="td-name"><div class="td-avatar" style="background:#e53e6a">SW</div><span class="td-name-text">Sam Watson</span></div></td><td>Marketing</td><td><span class="status-pill inactive">Inactive</span></td><td><div class="progress-bar-wrap"><div class="progress-bar"><div class="progress-fill rose" style="width:34%"></div></div><span class="progress-pct">34%</span></div></td><td>Aug 2024</td></tr>
+                <tr><td><div class="td-name"><div class="td-avatar" style="background:#818cf8">CN</div><span class="td-name-text">Casey Nguyen</span></div></td><td>Admin</td><td><span class="status-pill active">Active</span></td><td><div class="progress-bar-wrap"><div class="progress-bar"><div class="progress-fill" style="width:88%"></div></div><span class="progress-pct">88%</span></div></td><td>Nov 2023</td></tr>
+                </tbody>
+            </table>
+            </div>
+        </div> {% endcomment %}
+        </main>
+    </div>
+    </div>
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        const sidebar = document.getElementById('sidebar');
+        const overlay = document.getElementById('overlay');
+        let collapsed = false;
+        
+        function toggleSidebar() {
+            collapsed = !collapsed;
+            sidebar.classList.toggle('collapsed', collapsed);
+            if (collapsed) {
+            document.querySelectorAll('.submenu').forEach(s => s.classList.remove('open'));
+            document.querySelectorAll('.nav-item.has-sub').forEach(i => i.classList.remove('open'));
+            }
+        }
+        
+        function openMobile() { sidebar.classList.add('mobile-open'); overlay.classList.add('active'); document.body.style.overflow='hidden'; }
+        function closeMobile() { sidebar.classList.remove('mobile-open'); overlay.classList.remove('active'); document.body.style.overflow=''; }
+        
+        /* Submenu toggles */
+        document.querySelectorAll('.nav-item.has-sub').forEach(item => {
+            item.addEventListener('click', function() {
+            if (collapsed && window.innerWidth > 768) return;
+            const key = this.dataset.parent.toLowerCase();
+            const sub = document.getElementById('sub-' + key);
+            const isOpen = sub.classList.contains('open');
+            document.querySelectorAll('.submenu').forEach(s => s.classList.remove('open'));
+            document.querySelectorAll('.nav-item.has-sub').forEach(i => i.classList.remove('open'));
+            if (!isOpen) { sub.classList.add('open'); this.classList.add('open'); }
+            });
+        });
+        
+        /* Regular links */
+        document.querySelectorAll('.nav-item:not(.has-sub)').forEach(item => {
+            item.addEventListener('click', function(e) {
+            e.preventDefault();
+            document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+            document.querySelectorAll('.sub-item').forEach(i => i.classList.remove('active'));
+            this.classList.add('active');
+            document.getElementById('bcPage').textContent = this.dataset.page || 'Dashboard';
+            if (window.innerWidth <= 768) closeMobile();
+            });
+        });
+        
+        /* Sub-items */
+        document.querySelectorAll('.sub-item').forEach(item => {
+            item.addEventListener('click', function(e) {
+            e.preventDefault();
+            document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+            document.querySelectorAll('.sub-item').forEach(i => i.classList.remove('active'));
+            this.classList.add('active');
+            const parent = this.closest('.nav-section').querySelector('.nav-item.has-sub.open');
+            if (parent) document.getElementById('bcPage').textContent = parent.dataset.parent + ' › ' + this.textContent.trim().replace(/\d+/g,'').trim();
+            if (window.innerWidth <= 768) closeMobile();
+            });
+        });
+        
+        /* Bar chart */
+        const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+        const d25=[42,58,51,67,73,89,78,94,82,97,88,84], d24=[35,44,40,52,61,70,65,77,68,80,74,71];
+        const mx=Math.max(...d25,...d24), mxH=112;
+        const el=document.getElementById('chartBars');
+        months.forEach((m,i) => {
+            const c=document.createElement('div'); c.className='bar-col';
+            c.innerHTML=`<div class="bar teal" style="height:${Math.round(d24[i]/mx*mxH)}px" title="${m} 2024: $${d24[i]}k"></div><div class="bar accent" style="height:${Math.round(d25[i]/mx*mxH)}px" title="${m} 2025: $${d25[i]}k"></div><span class="bar-label">${m[0]}</span>`;
+            el.appendChild(c);
+        });
+
+
+        function toggleAvatarMenu(e) {
+            e.stopPropagation();
+            document.getElementById('avatarDropdown').classList.toggle('open');
+        }
+
+        function closeAvatarMenu() {
+            document.getElementById('avatarDropdown').classList.remove('open');
+        }
+
+        document.addEventListener('click', function (e) {
+            const menu = document.getElementById('avatarMenu');
+            if (menu && !menu.contains(e.target)) {
+                closeAvatarMenu();
+            }
+        });
+    </script>
+    <script>
+        {% if messages %}
+            {% for message in messages %}
+            Toastify({
+                text: "{{ message|escapejs }}",
+                duration: 3000,
+                gravity: "top",
+                position: "right",
+                close: true,
+                backgroundColor:
+                "{% if message.tags == 'success' %}green{% elif message.tags == 'error' %}red{% elif message.tags == 'warning' %}orange{% else %}blue{% endif %}",
+            }).showToast();
+            {% endfor %}
+        {% endif %}
+    </script>
+</body>
+</html>

@@ -4,11 +4,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>E-Plex – eCommerce Solution</title>
+    <title>
+        {% block title %}E-Plex – eCommerce Solution{% endblock %}
+    </title>
     <link rel="icon" type="image/png" href="{% static 'img/e_plex_logo.png' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css"/>
+    
     {% comment %} <link rel="stylesheet" href="{% static 'css/styles.css' %}"/> {% endcomment %}
     <link rel="stylesheet" href="{% static 'css/e_plex.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/accounts.css' %}"/>
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
     <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet"/>
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;600&family=Crimson+Text:wght@600;700&display=swap" rel="stylesheet">
@@ -32,7 +38,61 @@
                     <li class="nav-item"><a class="nav-link" href="#features">Features</a></li>
                     <li class="nav-item"><a class="nav-link" href="#pricing_section">Pricing</a></li>
                 </ul>
-                <a href="{% url 'get_started_url' %}" class="nav-link btn-nav ms-2">Get it now</a>
+                <!-- Auth Section -->
+                {% if user.is_authenticated %}
+                    <!-- Logged-in: show username + profile dropdown -->
+                    <div class="nav-item dropdown ms-3">
+                        <a class="nav-link dropdown-toggle d-flex align-items-center gap-2 user-menu" 
+                        href="#" 
+                        id="userDropdown" 
+                        role="button" 
+                        data-bs-toggle="dropdown" 
+                        aria-expanded="false">
+                            <!-- Avatar: profile picture or initials fallback -->
+                            <i class="bi bi-person"></i>
+                            <span class="username-text">{{ user.username }}</span>
+                        </a>
+                        <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                            <li>
+                                <div class="dropdown-header-info text-center">
+                                    <strong>{{ user.username }}</strong>
+                                    <small>{{ user.email }}</small>
+                                </div>
+                            </li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li>
+                                <a class="dropdown-item" style="font-size: 14px;" href="{% url 'profile_url' %}">
+                                    <i class="bi bi-person-circle me-2"></i> My Profile
+                                </a>
+                            </li>
+                            <li>
+                                <a class="dropdown-item" style="font-size: 14px;" href="{% url 'dashboard_url' %}">
+                                    <i class="bi bi-grid me-2"></i> Dashboard
+                                </a>
+                            </li>
+                            {% comment %} <li>
+                                <a class="dropdown-item" href="{% url 'settings_url' %}">
+                                    <i class="bi bi-gear me-2"></i> Settings
+                                </a>
+                            </li> {% endcomment %}
+                            <li><hr class="dropdown-divider"></li>
+                            <li>
+                                <form method="post" action="{% url 'logout_url' %}">
+                                    {% csrf_token %}
+                                    <button type="submit" class="dropdown-item text-danger">
+                                        <i class="bi bi-box-arrow-right me-2"></i> Sign Out
+                                    </button>
+                                </form>
+                            </li>
+                        </ul>
+                    </div>
+                {% else %}
+                    <!-- Guest: show Sign In + Get it now -->
+                    <a href="{% url 'login_url' %}" class="nav-link btn-signin ms-3">
+                        <i class="bi bi-person me-1"></i> Sign In
+                    </a>
+                    <a href="{% url 'get_started_url' %}" class="nav-link btn-nav ms-2">Get it now</a>
+                {% endif %}
             </div>
         </div>
     </nav>
@@ -94,7 +154,7 @@
         </div>
     </div>
     </footer>
-
+    <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
     <script>
     // Scroll animation
@@ -125,6 +185,22 @@
         });
     });
     </script>
+    <script>
+        {% if messages %}
+            {% for message in messages %}
+            Toastify({
+                text: "{{ message|escapejs }}",
+                duration: 3000,
+                gravity: "top",
+                position: "right",
+                close: true,
+                backgroundColor:
+                "{% if message.tags == 'success' %}green{% elif message.tags == 'error' %}red{% elif message.tags == 'warning' %}orange{% else %}blue{% endif %}",
+            }).showToast();
+            {% endfor %}
+        {% endif %}
+    </script>
     <script src="{% static 'js/script.js' %}"></script>
+    
 </body>
 </html>
