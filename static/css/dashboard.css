@@ -144,6 +144,9 @@ body {
 .nav-section {
   margin-bottom: 4px;
 }
+.nav-section .nav-icon i {
+  font-size: 18px;
+}
 
 .nav-section-title {
   font-size: 10px;
@@ -965,7 +968,7 @@ table {
 }
 thead th {
   text-align: left;
-  padding: 0 22px 12px;
+  padding: 9px 22px 12px;
   font-size: 11px;
   font-weight: 700;
   color: var(--text-muted);

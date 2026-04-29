@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>
-        {% block title %}E-Plex – Dashboard{% endblock %}
+    <title>E-Plex –
+        {% block title %} {% endblock %}
     </title>
     <link rel="icon" type="image/png" href="{% static 'img/e_plex_logo.png' %}">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
@@ -15,6 +15,7 @@
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
 
     <link rel="stylesheet" href="{% static 'css/dashboard.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/dashboard_all.css' %}"/>
 
 </head>
 <body>
@@ -30,104 +31,59 @@
 
         <div class="sidebar-body">
             <div class="nav-section">
-                <div class="nav-section-title">Overview</div>
+                <div class="nav-section-title">Client Portal</div>
 
-                <a class="nav-item active" href="#" data-page="Dashboard">
-                    <span class="nav-icon"><svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></span>
+                <a class="nav-item" href="{% url 'dashboard_url' %}" data-page="Dashboard">
+                    <span class="nav-icon"><i class="bi bi-house-door"></i></span>
                     <span class="nav-label">Dashboard</span>
                 </a>
 
-                <div class="nav-item has-sub" data-parent="Analytics">
-                    <span class="nav-icon"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></span>
-                    <span class="nav-label">Analytics</span>
+                <div class="nav-item has-sub" data-parent="Services">
+                    <span class="nav-icon"><i class="bi bi-clipboard-pulse"></i></span>
+                    <span class="nav-label">Services</span>
                     <span class="chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span>
                 </div>
-                <div class="submenu" id="sub-analytics">
-                    <a class="sub-item active" href="#">Overview</a>
-                    <a class="sub-item" href="#">Traffic Sources</a>
-                    <a class="sub-item" href="#">Conversions</a>
-                    <a class="sub-item" href="#">Funnels</a>
+                <div class="submenu" id="sub-services">
+                    <a class="sub-item" href="#">Overview</a>
+                    <a class="sub-item" href="#">ePlex Services</a>
                 </div>
-
-                {% comment %} <div class="nav-item has-sub" data-parent="Reports">
-                    <span class="nav-icon"><svg viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg></span>
-                    <span class="nav-label">Reports</span>
-                    <span class="badge">3</span>
-                    <span class="chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span>
-                </div>
-                <div class="submenu" id="sub-reports">
-                    <a class="sub-item" href="#">Monthly Summary</a>
-                    <a class="sub-item" href="#">Sales Report</a>
-                    <a class="sub-item" href="#">User Activity <span class="sub-badge">2</span></a>
-                    <a class="sub-item" href="#">Custom Report</a>
-                </div> {% endcomment %}
-            </div>
-
-            {% comment %} <div class="nav-section">
-                <div class="nav-section-title">Manage</div>
-
-                <div class="nav-item has-sub" data-parent="Users">
-                <span class="nav-icon"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></span>
-                <span class="nav-label">Users</span>
-                <span class="badge">128</span>
-                <span class="chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span>
-                </div>
-                <div class="submenu" id="sub-users">
-                <a class="sub-item" href="#">All Users</a>
-                <a class="sub-item" href="#">Roles &amp; Permissions</a>
-                <a class="sub-item" href="#">Invitations</a>
-                <a class="sub-item" href="#">Activity Log</a>
-                </div>
-
-                <a class="nav-item" href="#" data-page="Products">
-                <span class="nav-icon"><svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/><path d="M16 10a4 4 0 0 1-8 0"/></svg></span>
-                <span class="nav-label">Products</span>
-                </a>
-
-                <div class="nav-item has-sub" data-parent="Billing">
-                <span class="nav-icon"><svg viewBox="0 0 24 24"><rect x="1" y="4" width="22" height="16" rx="2"/><line x1="1" y1="10" x2="23" y2="10"/></svg></span>
-                <span class="nav-label">Billing</span>
-                <span class="chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span>
-                </div>
-                <div class="submenu" id="sub-billing">
-                <a class="sub-item" href="#">Subscriptions</a>
-                <a class="sub-item" href="#">Invoices</a>
-                <a class="sub-item" href="#">Payment Methods</a>
-                </div>
-
-                <a class="nav-item" href="#" data-page="Transactions">
-                <span class="nav-icon"><svg viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></span>
-                <span class="nav-label">Transactions</span>
-                <span class="badge rose">12</span>
-                </a>
             </div>
 
             <div class="nav-section">
-                <div class="nav-section-title">System</div>
+                <div class="nav-section-title">Account</div>
 
-                <a class="nav-item" href="#" data-page="Messages">
-                <span class="nav-icon"><svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></span>
-                <span class="nav-label">Messages</span>
+                <a class="nav-item" href="{% url 'account_details_url' %}" data-page="Account Details">
+                    <span class="nav-icon"><i class="bi bi-person"></i></span>
+                    <span class="nav-label">Account Details</span>
+                </a>
+                <a class="nav-item" href="#" data-page="Billing">
+                    <span class="nav-icon"><i class="bi bi-cash"></i></span>
+                    <span class="nav-label">Billing</span>
+                </a>
+                <a class="nav-item" href="#" data-page="History">
+                    <span class="nav-icon"><i class="bi bi-clock-history"></i></span>
+                    <span class="nav-label">History</span>
                 </a>
 
-                <a class="nav-item" href="#" data-page="Integrations">
-                <span class="nav-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14M4.93 4.93a10 10 0 0 0 0 14.14"/></svg></span>
-                <span class="nav-label">Integrations</span>
+            </div>
+
+            <div class="nav-section">
+                <div class="nav-section-title">Resources</div>
+
+                <a class="nav-item" href="#" data-page="Knowledge Base">
+                    <span class="nav-icon"><i class="bi bi-book-half"></i></span>
+                    <span class="nav-label">Knowledge Base</span>
                 </a>
 
-                <div class="nav-item has-sub" data-parent="Settings">
-                <span class="nav-icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></span>
-                <span class="nav-label">Settings</span>
-                <span class="chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span>
-                </div>
-                <div class="submenu" id="sub-settings">
-                <a class="sub-item" href="#">General</a>
-                <a class="sub-item" href="#">Security</a>
-                <a class="sub-item" href="#">Notifications</a>
-                <a class="sub-item" href="#">API Keys</a>
-                <a class="sub-item" href="#">Appearance</a>
-                </div>
-            </div> {% endcomment %}
+                <a class="nav-item" href="#" data-page="Support Tickets">
+                    <span class="nav-icon"><i class="bi bi-headset"></i></span>
+                    <span class="nav-label">Support Tickets</span>
+                </a>
+                <a class="nav-item" href="http://e-plex.odelltech.com/" data-page="ePlex" target="_blank">
+                    <span class="nav-icon"><i class="bi bi-globe-central-south-asia"></i></span>
+                    <span class="nav-label">E-Plex</span>
+                </a>
+            </div>
 
         </div>
 
@@ -173,13 +129,13 @@
         </div> {% endcomment %}
 
         <div class="topbar-actions">
-            {% comment %} <button class="topbar-btn" aria-label="Notifications">
+            <button class="topbar-btn" aria-label="Notifications">
                 <svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
                 <span class="notif-dot"></span>
             </button>
             <button class="topbar-btn" aria-label="Help">
                 <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-            </button> {% endcomment %}
+            </button>
 
             <!-- Avatar + dropdown -->
             <div class="avatar-menu" id="avatarMenu">
@@ -223,38 +179,10 @@
             </div>
         </header>
 
-        <main class="page">
-        <div class="page-header">
-            <h1>Hello, {{user.username}} ☀️</h1>
-            <p>Here's what's happening across your workspace today.</p>
-        </div>
 
-        <div class="stats-grid">
-            <div class="row">
-                <div class="col-md-3">
-                    <div class="stat-card">
-                        <div class="stat-top"><span class="stat-label">Total Tickets</span><div class="stat-icon si-blue"><i class="bi bi-ticket"></i></div></div>
-                        <div class="stat-value">10</div>
-                    </div>
-                </div>
-            </div>
+        {% block content %}
             
-            {% comment %} <div class="stat-card">
-            <div class="stat-top"><span class="stat-label">Active Users</span><div class="stat-icon si-teal"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></div></div>
-            <div class="stat-value">3,482</div>
-            <div class="stat-change up"><svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg>+8.1% from last month</div>
-            </div>
-            <div class="stat-card">
-            <div class="stat-top"><span class="stat-label">New Orders</span><div class="stat-icon si-amber"><svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/></svg></div></div>
-            <div class="stat-value">1,247</div>
-            <div class="stat-change down"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>-3.2% from last month</div>
-            </div>
-            <div class="stat-card">
-            <div class="stat-top"><span class="stat-label">Churn Rate</span><div class="stat-icon si-rose"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div></div>
-            <div class="stat-value">2.8%</div>
-            <div class="stat-change up"><svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg>-0.4% improvement</div>
-            </div> {% endcomment %}
-        </div>
+        {% endblock  %}
 
         {% comment %} <div class="content-row">
             <div class="card">
@@ -301,7 +229,8 @@
             </table>
             </div>
         </div> {% endcomment %}
-        </main>
+
+
     </div>
     </div>
 
@@ -344,6 +273,9 @@
         /* Regular links */
         document.querySelectorAll('.nav-item:not(.has-sub)').forEach(item => {
             item.addEventListener('click', function(e) {
+            if (this.getAttribute('href') && this.getAttribute('href') !== '#') {
+                return;
+            }
             e.preventDefault();
             document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
             document.querySelectorAll('.sub-item').forEach(i => i.classList.remove('active'));
@@ -356,6 +288,9 @@
         /* Sub-items */
         document.querySelectorAll('.sub-item').forEach(item => {
             item.addEventListener('click', function(e) {
+            if (this.getAttribute('href') && this.getAttribute('href') !== '#') {
+                return;
+            }
             e.preventDefault();
             document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
             document.querySelectorAll('.sub-item').forEach(i => i.classList.remove('active'));
@@ -391,6 +326,19 @@
             const menu = document.getElementById('avatarMenu');
             if (menu && !menu.contains(e.target)) {
                 closeAvatarMenu();
+            }
+        });
+    </script>
+    <script>
+        // Highlight active menu based on current URL
+        const currentPath = window.location.pathname;
+
+        document.querySelectorAll('.nav-item').forEach(item => {
+            const link = item.getAttribute('href');
+
+            if (link && link !== '#' && currentPath.includes(link)) {
+                document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+                item.classList.add('active');
             }
         });
     </script>

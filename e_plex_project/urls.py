@@ -7,6 +7,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('e_plex_app.urls')),
     path('accounts/', include('accounts.urls')),
+    path('dashboard/', include('dashboard_app.urls')),
 ]
 
 if settings.DEBUG:

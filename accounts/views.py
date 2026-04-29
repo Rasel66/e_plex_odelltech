@@ -73,11 +73,3 @@ def profile_view(request):
 @login_required
 def settings_view(request):
     return render(request, 'accounts/settings.html')
-
-
-def dashboard_view(request):
-    profile = Profile.objects.get(user=request.user)
-    context = {
-        'profile': profile,
-    }
-    return render(request, 'dashboard.html', context)

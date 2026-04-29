@@ -30,6 +30,7 @@ INSTALLED_APPS = [
     'crispy_bootstrap5',
     'e_plex_app',
     'accounts',
+    'dashboard_app',
 ]
 
 CRISPY_TEMPLATE_PACK = "bootstrap5"
