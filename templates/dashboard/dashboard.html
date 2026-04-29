@@ -1,0 +1,42 @@
+{% extends "dashboard.html" %}
+{% load static %}
+{% block title %}Dashboard{% endblock  %}
+
+{% block content %}
+<main class="page">
+    <div class="page-header">
+        <h1>Hello, {{user.username}} ☀️</h1>
+        <p>Here's what's happening across your workspace today.</p>
+    </div>
+
+    <div class="stats-grid">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="stat-card">
+                    <div class="stat-top"><span class="stat-label">Total Tickets</span><div class="stat-icon si-blue"><i class="bi bi-ticket"></i></div></div>
+                    <div class="stat-value">10</div>
+                </div>
+            </div>
+        </div>
+        
+        {% comment %} <div class="stat-card">
+        <div class="stat-top"><span class="stat-label">Active Users</span><div class="stat-icon si-teal"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></div></div>
+        <div class="stat-value">3,482</div>
+        <div class="stat-change up"><svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg>+8.1% from last month</div>
+        </div>
+        <div class="stat-card">
+        <div class="stat-top"><span class="stat-label">New Orders</span><div class="stat-icon si-amber"><svg viewBox="0 0 24 24"><path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/></svg></div></div>
+        <div class="stat-value">1,247</div>
+        <div class="stat-change down"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>-3.2% from last month</div>
+        </div>
+        <div class="stat-card">
+        <div class="stat-top"><span class="stat-label">Churn Rate</span><div class="stat-icon si-rose"><svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div></div>
+        <div class="stat-value">2.8%</div>
+        <div class="stat-change up"><svg viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg>-0.4% improvement</div>
+        </div> {% endcomment %}
+    </div>
+
+
+</main>
+{% endblock  %}
+
