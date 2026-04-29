@@ -13,6 +13,7 @@
     {% comment %} <link rel="stylesheet" href="{% static 'css/styles.css' %}"/> {% endcomment %}
     <link rel="stylesheet" href="{% static 'css/e_plex.css' %}"/>
     <link rel="stylesheet" href="{% static 'css/accounts.css' %}"/>
+    <link rel="stylesheet" href="{% static 'css/responsive.css' %}"/>
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/toastify-js/src/toastify.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
@@ -33,10 +34,10 @@
             </button>
             <div class="collapse navbar-collapse" id="mainNav">
                 <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="/">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#demo_section">Demo</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#features">Features</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#pricing_section">Pricing</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'home_page_url' %}">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'home_page_url' %}#demo_section">Demo</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'home_page_url' %}#features">Features</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{% url 'home_page_url' %}#pricing_section">Pricing</a></li>
                 </ul>
                 <!-- Auth Section -->
                 {% if user.is_authenticated %}
@@ -122,9 +123,9 @@
             <div class="col-6 col-lg-2">
                 <p class="footer-heading">Product</p>
                 <a class="footer-link" href="#">Overview</a>
-                <a class="footer-link" href="#features">Features</a>
-                <a class="footer-link" href="#pricing_section">Pricing</a>
-                <a class="footer-link" href="#demo_section">Demo</a>
+                <a class="footer-link" href="{% url 'home_page_url' %}#features">Features</a>
+                <a class="footer-link" href="{% url 'home_page_url' %}#pricing_section">Pricing</a>
+                <a class="footer-link" href="{% url 'home_page_url' %}#demo_section">Demo</a>
             </div>
             <div class="col-6 col-lg-2">
                 <p class="footer-heading">Services</p>
@@ -148,9 +149,8 @@
                 <a class="footer-link" href="#">Contact</a>
             </div>
         </div>
-        <div class="footer-bottom d-flex flex-wrap justify-content-between">
-            <span>© <script>document.write(new Date().getFullYear())</script> ePlex. All rights reserved.</span>
-            <span>Made with <i class="fas fa-heart" style="color:var(--primary);"></i> for modern businesses</span>
+        <div class="footer-bottom text-center">
+            <span>© <script>document.write(new Date().getFullYear())</script> ePlex. All rights reserved. Powered by O'Dell Tech Ltd.</span>
         </div>
     </div>
     </footer>
