@@ -113,11 +113,11 @@ a.nav-link.btn-signin.ms-3 {
 
 .card {
     background: #e0e0e0;
-    padding-top: 10px;
+    padding-top: 0px;
     border-radius: 16px;
     width: 100%;
-    margin: 60px auto;
-    width: 1024px;
+    margin: 34x auto;
+    width: 862px;
     overflow: hidden;
     box-shadow: 0 24px 64px rgba(0,0,0,0.5);
 }
