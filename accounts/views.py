@@ -36,7 +36,7 @@ def login_view(request):
             next_url = request.GET.get('next', 'home_page_url')
             return redirect(next_url)
         else:
-            messages.error(request, 'Invalid username or password. Please try again.')
+            messages.error(request, 'Invalid email or password. Please try again.')
     else:
         form = LoginForm()
     return render(request, 'accounts/login.html', {'form': form})

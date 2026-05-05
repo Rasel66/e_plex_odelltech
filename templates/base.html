@@ -67,10 +67,15 @@
                                 </a>
                             </li>
                             <li>
+                                <a class="dropdown-item" style="font-size: 14px;" target="_blank" href="https://docs.google.com/forms/d/e/1FAIpQLScmrqg65u95Gff4XhWthR4mujhMTSr7oxR_VNnz7uNKSzeErg/viewform?usp=publish-editor">
+                                    <i class="bi bi-headset me-1"></i> &nbsp;Support
+                                </a>
+                            </li>
+                            {% comment %} <li>
                                 <a class="dropdown-item" style="font-size: 14px;" href="{% url 'dashboard_url' %}">
                                     <i class="bi bi-grid me-2"></i> Dashboard
                                 </a>
-                            </li>
+                            </li> {% endcomment %}
                             {% comment %} <li>
                                 <a class="dropdown-item" href="{% url 'settings_url' %}">
                                     <i class="bi bi-gear me-2"></i> Settings
@@ -89,10 +94,10 @@
                     </div>
                 {% else %}
                     <!-- Guest: show Sign In + Get it now -->
+                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSdt2PXn88eEPow3KN9qdyBeq1C2LiDIUR8id0SpUPFCj-favg/viewform?usp=publish-editor" target="_blank" class="nav-link btn-nav ms-2">Get it now</a>
                     <a href="{% url 'login_url' %}" class="nav-link btn-signin ms-3">
                         <i class="bi bi-person me-1"></i> Sign In
                     </a>
-                    <a href="{% url 'get_started_url' %}" class="nav-link btn-nav ms-2">Get it now</a>
                 {% endif %}
             </div>
         </div>
