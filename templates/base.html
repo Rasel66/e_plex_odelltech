@@ -94,7 +94,7 @@
                     </div>
                 {% else %}
                     <!-- Guest: show Sign In + Get it now -->
-                    <a href="https://docs.google.com/forms/d/e/1FAIpQLSdt2PXn88eEPow3KN9qdyBeq1C2LiDIUR8id0SpUPFCj-favg/viewform?usp=publish-editor" target="_blank" class="nav-link btn-nav ms-2">Get it now</a>
+                    <a href="https://script.google.com/macros/s/AKfycbwHPROydyl7kspyRYRkyxK38MrL3ECZudW_fGHuXlLvCdTbWukDgIpm0desX33sObW3/exec" target="_blank" class="nav-link btn-nav ms-2">Get it now</a>
                     <a href="{% url 'login_url' %}" class="nav-link btn-signin ms-3">
                         <i class="bi bi-person me-1"></i> Sign In
                     </a>
@@ -119,10 +119,10 @@
                 <div class="footer-brand"><img src="{% static 'img/header_loogo.png' %}" alt="ePlex Logo" style="width:110px; height:35px; margin-right:8px; vertical-align: middle;"></div>
                 <p class="footer-tagline">Accelerate your business growth with our powerful eCommerce platform.</p>
                 <div class="footer-social">
-                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="https://www.facebook.com/eplexsoft" target="_blank"><i class="fab fa-facebook-f"></i></a>
                 <a href="#"><i class="fab fa-twitter"></i></a>
                 <a href="#"><i class="fab fa-instagram"></i></a>
-                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                <a href="https://www.linkedin.com/company/o-dell-tech" target="_blank"><i class="fab fa-linkedin-in"></i></a>
                 </div>
             </div>
             <div class="col-6 col-lg-2">
@@ -206,6 +206,10 @@
         {% endif %}
     </script>
     <script src="{% static 'js/script.js' %}"></script>
+
+    {% block JS %}
+    
+    {% endblock  %}
     
 </body>
 </html>
