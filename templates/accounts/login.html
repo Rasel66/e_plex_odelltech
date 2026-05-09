@@ -34,13 +34,18 @@
       <!-- Password -->
       <div class="form-group">
         <label for="id_password">Password</label>
-        <input 
-          type="password" 
-          name="password" 
-          id="id_password" 
-          placeholder="Enter password"
-          required
-        >
+        <div class="password-wrapper">
+          <input 
+            type="password" 
+            name="password" 
+            id="id_password" 
+            placeholder="Enter password"
+            required
+          >
+          <span class="toggle-password" id="togglePassword">
+            <i class="fa-solid fa-eye"></i>
+          </span>
+        </div>
         {% if form.password.errors %}
           <span class="error">{{ form.password.errors.0 }}</span>
         {% endif %}
@@ -56,3 +61,27 @@
   </div>
 </div>
 {% endblock %}
+
+{% block JS %}
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const togglePassword = document.getElementById('togglePassword');
+    const password = document.getElementById('id_password');
+    const icon = togglePassword.querySelector('i');
+
+    togglePassword.addEventListener('click', function(){
+        const type = password.getAttribute('type') === 'password' ? 'text' : 'password';
+        password.setAttribute('type', type);
+
+        if (type === 'password'){
+            icon.classList.remove('fa-eye-slash');
+            icon.classList.add('fa-eye');
+        }
+        else {
+            icon.classList.remove('fa-eye');
+            icon.classList.add('fa-eye-slash');
+        }
+    });
+  });
+</script>
+{% endblock  %}
