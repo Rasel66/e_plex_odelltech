@@ -72,9 +72,9 @@ WSGI_APPLICATION = 'e_plex_project.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'e_plex',
-        'USER': 'root',
-        'PASSWORD': '',
+        'NAME': 'eplexsoft_eplex_user_journey_db',
+        'USER': 'eplexsoft_eplexsoft',
+        'PASSWORD': 'eplexsoft@eplexsoft',
         'HOST': '127.0.0.1',
         'PORT': '3306'
     }
