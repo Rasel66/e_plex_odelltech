@@ -1,0 +1,139 @@
+/* FOR TABLETS RESPONSIVENESS */
+@media (max-width: 1023px) {}
+
+/* FOR MOBILE RESPONSIVENESS */
+@media (max-width: 767px){
+    /* menu */
+    .navbar-collapse {
+        margin-top: 17px;
+    }
+    li.nav-item {
+        margin-bottom: 4px;
+    }
+    .nav-item.dropdown.ms-3 {
+        margin-left: 0px !important;
+    }
+    .dropdown-menu[data-bs-popper] {
+        top: -8rem;
+    }
+    .dropdown-header-info.text-center small {
+        display: none;
+    }
+    a.nav-link.btn-signin.ms-3 {
+        margin: 8px 0px;
+    }
+    .btn-nav {
+        display: inline-block;
+    }
+
+
+    /* ----------------- */
+    .slide-content h1 {
+        font-size: 27px;
+    }
+    p.hero-sub {
+        font-size: 14px;
+    }
+    p.hero-support {
+        font-size: 12px;
+    }
+    .hero-carousel {
+        height: 500px;
+    }
+    .hero-badge-pill {
+        font-size: 12px;
+        margin-bottom: 11px;
+    }
+    .btn-cta-outline {
+        padding: 10px 30px;
+    }
+    /* ----------------- */
+    h2.section-title {
+        font-size: 20px;
+    }
+    p.section-sub {
+        font-size: 13px;
+        margin-bottom: 25px !important;
+    }
+    /* ----------------- */
+    .power-bar.fade-up.mt-4.visible {
+        font-size: 13px;
+    }
+    .text-center.mb-5 {
+        margin-bottom: 17px !important;
+    }
+    p.demo-label {
+        font-size: 16px;
+        margin: 0px 3px;
+    }
+    p.demo-text {
+        font-size: 13px;
+        margin: 10px 3px;
+    }
+    /* ------------------ */
+    .step-card {
+        padding: 1rem 1rem;
+    }
+    .step-num {
+        margin: 0 auto 10px;
+    }
+    .features-section {
+        padding: 35px 0;
+    }
+    .system-section {
+        padding: 35px 0;
+    }
+    .why-section {
+        padding: 35px 0;
+    }
+    /* ------------------ */
+    .payment-section {
+        padding: 45px 0;
+    }
+    .payment-visual {
+        height: auto;
+        min-height: 412px;
+    }
+    .payment-content {
+        padding: 41px;
+        margin-top: 11px;
+    }
+    .center-card {
+        height: 84%;
+    }
+    .payment-content p {
+        display: none;
+    }
+    .btn-common-all {
+        margin-top: 11px;
+    }
+    .card-1 {
+        top: 45px;
+    }
+    .card-4 {
+        top: 44px;
+    }
+    .card-2 {
+        bottom: 163px;
+    }
+    .card-5 {
+        bottom: 163px;
+    }
+    /* ----------------- */
+    .trust-section {
+        padding: 35px 0;
+    }
+    .trust-line {
+        font-size: 14px;
+    }
+    .strong-line {
+        font-size: 14px;
+    }
+    .final-cta {
+        padding: 55px 0;
+    }
+    /* ---------------- */
+    footer {
+        padding: 29px 0 30px;
+    }
+}
