@@ -1,0 +1,141 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Create Account{% endblock %}
+
+{% block content %}
+<div class="auth-container" style="background-image:url('{% static 'img/hero_6.jpeg' %}');">
+  <div class="auth-card">
+    <h2 class="auth-title">Create Account</h2>
+
+    {% if messages %}
+      {% for message in messages %}
+        <div class="alert">{{ message }}</div>
+      {% endfor %}
+    {% endif %}
+
+    <form method="post">
+      {% csrf_token %}
+
+      <!-- Username -->
+      <div class="form-group">
+        <label for="id_username">Username</label>
+        <input 
+          type="text" 
+          name="username" 
+          id="id_username"
+          placeholder="Enter username"
+          value="{{ form.username.value|default:'' }}"
+          required
+        >
+        {% if form.username.errors %}
+          <span class="error">{{ form.username.errors.0 }}</span>
+        {% endif %}
+      </div>
+
+      <!-- Email -->
+      <div class="form-group">
+        <label for="id_email">Email</label>
+        <input 
+          type="email" 
+          name="email" 
+          id="id_email"
+          placeholder="Enter email"
+          value="{{ form.email.value|default:'' }}"
+          required
+        >
+        {% if form.email.errors %}
+          <span class="error">{{ form.email.errors.0 }}</span>
+        {% endif %}
+      </div>
+
+      <!-- Password -->
+      <div class="form-group">
+        <label for="id_password1">Password</label>
+        <div class="password-wrapper">
+          <input 
+            type="password" 
+            name="password1" 
+            id="id_password1"
+            placeholder="Enter password"
+            required
+          >
+          <span class="toggle-password" id="togglePassword1">
+            <i class="fa-solid fa-eye"></i>
+          </span>
+        </div>
+        {% if form.password1.errors %}
+          <span class="error">{{ form.password1.errors.0 }}</span>
+        {% endif %}
+      </div>
+
+      <!-- Confirm Password -->
+      <div class="form-group">
+        <label for="id_password2">Confirm Password</label>
+        <div class="password-wrapper">
+          <input 
+            type="password" 
+            name="password2" 
+            id="id_password2"
+            placeholder="Confirm password"
+            required
+          >
+          <span class="toggle-password" id="togglePassword2">
+            <i class="fa-solid fa-eye"></i>
+          </span>
+        </div>
+        {% if form.password2.errors %}
+          <span class="error">{{ form.password2.errors.0 }}</span>
+        {% endif %}
+      </div>
+
+      <button type="submit" class="btn-submit">Create Account</button>
+    </form>
+
+    <p class="footer-text">
+      Already have an account?
+      <a href="{% url 'login_url' %}">Sign In</a>
+    </p>
+  </div>
+</div>
+{% endblock %}
+
+{% block JS %}
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const togglePassword1 = document.getElementById('togglePassword1');
+    const togglePassword2 = document.getElementById('togglePassword2');
+    const password1 = document.getElementById('id_password1');
+    const password2 = document.getElementById('id_password2');
+    const icon1 = togglePassword1.querySelector('i');
+    const icon2 = togglePassword2.querySelector('i');
+
+    togglePassword1.addEventListener('click', function(){
+      const type = password1.getAttribute('type') === 'password' ? 'text' : 'password';
+      password1.setAttribute('type', type);
+
+      if (type === 'password'){
+        icon1.classList.remove('fa-eye-slash');
+        icon1.classList.add('fa-eye');
+      }
+      else {
+        icon1.classList.remove('fa-eye');
+        icon1.classList.add('fa-eye-slash');
+      }
+    });
+
+    togglePassword2.addEventListener('click', function(){
+      const type = password2.getAttribute('type') === 'password' ? 'text' : 'password';
+      password2.setAttribute('type', type);
+
+      if (type === 'password'){
+        icon2.classList.remove('fa-eye-slash');
+        icon2.classList.add('fa-eye');
+      }
+      else {
+        icon2.classList.remove('fa-eye');
+        icon2.classList.add('fa-eye-slash');
+      }
+    });
+  });
+</script>
+{% endblock %}

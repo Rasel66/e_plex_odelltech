@@ -1,0 +1,95 @@
+{% extends "dashboard.html" %}
+{% load static %}
+{% block title %}Account Details{% endblock  %}
+
+{% block content %}
+<main class="page">
+    <div class="auth-container">
+        <div class="tabs">
+            <a href="#" class="tab active">Overview</a>
+            <a href="#" class="tab">Edit Details</a>
+            <a href="#" class="tab">Change Password</a>
+            <a href="#" class="tab">Settings</a>
+            {% comment %} <a href="{% url 'profile_overview' %}" 
+                class="tab {% if request.resolver_match.url_name == 'profile_overview' %}active{% endif %}">
+                Overview
+                </a>
+
+                <a href="{% url 'edit_profile' %}" 
+                class="tab {% if request.resolver_match.url_name == 'edit_profile' %}active{% endif %}">
+                Edit Details
+                </a>
+
+                <a href="{% url 'change_password' %}" 
+                class="tab {% if request.resolver_match.url_name == 'change_password' %}active{% endif %}">
+                Change Password
+            </a> {% endcomment %}
+        </div>
+        <div class="card">
+            <table class="info-table">
+                <thead>
+                <tr>
+                    <th>Information type</th>
+                    <th>Data</th>
+                    <th>Purpose</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td>First Name</td>
+                    <td>Akmal</td>
+                    <td><span class="purpose-badge"><span class="dot"></span>Billing</span></td>
+                </tr>
+                <tr>
+                    <td>Last Name</td>
+                    <td>Hossain</td>
+                    <td><span class="purpose-badge"><span class="dot"></span>Billing</span></td>
+                </tr>
+                <tr>
+                    <td>Phone</td>
+                    <td>+880 1746642467</td>
+                    <td><span class="purpose-badge"><span class="dot"></span>Billing</span></td>
+                </tr>
+                <tr>
+                    <td>Type</td>
+                    <td>Organization / Business</td>
+                    <td><span class="purpose-badge"><span class="dot"></span>Billing</span></td>
+                </tr>
+                <tr>
+                    <td>Organization</td>
+                    <td>Test</td>
+                    <td><span class="purpose-badge"><span class="dot"></span>Billing</span></td>
+                </tr>
+                <tr>
+                    <td>Email Address</td>
+                    <td>test@gmail.com</td>
+                    <td><span class="purpose-badge"><span class="dot"></span>Billing</span></td>
+                </tr>
+                <tr>
+                    <td>Country</td>
+                    <td>BD</td>
+                    <td><span class="purpose-badge"><span class="dot"></span>Billing</span></td>
+                </tr>
+                <tr>
+                    <td>State</td>
+                    <td>Dhaka District</td>
+                    <td><span class="purpose-badge"><span class="dot"></span>Billing</span></td>
+                </tr>
+                <tr>
+                    <td>City</td>
+                    <td>Dhaka</td>
+                    <td><span class="purpose-badge"><span class="dot"></span>Billing</span></td>
+                </tr>
+                <tr>
+                    <td>Postal Code</td>
+                    <td>1216</td>
+                    <td><span class="purpose-badge"><span class="dot"></span>Billing</span></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        
+    </div>
+</main>
+{% endblock  %}
+

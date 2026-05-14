@@ -1,0 +1,124 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+
+<section class="main-section">
+  <div class="container">
+    <div class="card-custom">
+      <div class="row g-4">
+
+
+        <div class="col-12 col-md-6 col-lg-5">
+          <h1 class="section-title">Get Started Now</h1>
+          <p class="section-sub">Please fill out this form.</p>
+
+          <div class="row g-3">
+            <div class="col-6">
+              <label class="form-label">First name</label>
+              <input type="text" class="form-control" placeholder="First name"/>
+            </div>
+            <div class="col-6">
+              <label class="form-label">Last name</label>
+              <input type="text" class="form-control" placeholder="Last name"/>
+            </div>
+            <div class="col-12">
+              <label class="form-label">Email</label>
+              <input type="email" class="form-control" placeholder="you@company.com"/>
+            </div>
+            <div class="col-12">
+              <label class="form-label">Phone number</label>
+              <div class="phone-group">
+                <select class="form-select">
+                  <option>US 🇺🇸</option>
+                  <option>BD 🇧🇩</option>
+                  <option>UK 🇬🇧</option>
+                  <option>CA 🇨🇦</option>
+                </select>
+                <input type="tel" class="form-control" placeholder="+1 (555) 000–0000"/>
+              </div>
+            </div>
+            <div class="col-12">
+              <label class="form-label">Message</label>
+              <textarea class="form-control" placeholder="Leave us a message…"></textarea>
+            </div>
+          </div>
+
+          <div class="privacy-check">
+            <input type="checkbox" id="privacy"/>
+            <label for="privacy">You agree to our friendly <a href="#">privacy policy</a>.</label>
+          </div>
+        </div>
+
+        <!-- RIGHT: CREDIT CARD DETAILS -->
+        <div class="col-12 col-md-6 col-lg-7 col-divider ps-md-5">
+          <p class="cc-title">Credit Card Details</p>
+
+          <div class="payment-row">
+            <span class="payment-label">Payment<br/>Method</span>
+            <div class="card-icons">
+              <div class="brand-mc"></div>
+              <div class="brand-visa"><span>VISA</span></div>
+              <div class="brand-amex"><span>AMEX</span></div>
+              <div class="brand-disc"><span>DISCOVER</span></div>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Name on card</label>
+            <input type="text" class="form-control" placeholder="Meet Patel"/>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Card number</label>
+            <div class="input-wrap">
+              <input type="text" class="form-control" placeholder="0000 0000 0000 0000" maxlength="19"
+                     oninput="this.value=this.value.replace(/[^0-9]/g,'').replace(/(.{4})/g,'$1 ').trim()"/>
+              <span class="cc-icon">💳</span>
+            </div>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Card expiration</label>
+            <div class="expiry-row">
+              <select class="form-select">
+                <option value="" disabled selected>Month</option>
+                <option>01 – Jan</option><option>02 – Feb</option><option>03 – Mar</option>
+                <option>04 – Apr</option><option>05 – May</option><option>06 – Jun</option>
+                <option>07 – Jul</option><option>08 – Aug</option><option>09 – Sep</option>
+                <option>10 – Oct</option><option>11 – Nov</option><option>12 – Dec</option>
+              </select>
+              <select class="form-select" id="expiry-year">
+                <option value="" disabled selected>Year</option>
+              </select>
+              <script>
+                (function () {
+                  const sel = document.getElementById('expiry-year');
+                  const start = new Date().getFullYear();
+                  for (let y = start; y <= start + 10; y++) {
+                    const opt = document.createElement('option');
+                    opt.value = y;
+                    opt.textContent = y;
+                    sel.appendChild(opt);
+                  }
+                })();
+              </script>
+            </div>
+          </div>
+
+          <div class="mb-1">
+            <label class="form-label">Card Security Code</label>
+            <div class="input-wrap">
+              <input type="text" class="form-control" placeholder="Code" maxlength="4"/>
+              <span class="cc-icon" title="3-4 digit code on your card">❓</span>
+            </div>
+          </div>
+
+          <button class="btn-proceed">Proceed to Payment</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}
