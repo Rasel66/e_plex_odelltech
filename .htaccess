@@ -1,0 +1,17 @@
+# DO NOT REMOVE. CLOUDLINUX PASSENGER CONFIGURATION BEGIN
+PassengerAppRoot "/home/eplexsoft/eplexsoft.com"
+PassengerBaseURI "/"
+PassengerPython "/home/eplexsoft/virtualenv/eplexsoft.com/3.9/bin/python"
+# DO NOT REMOVE. CLOUDLINUX PASSENGER CONFIGURATION END
+
+# STATIC FILES
+Alias /static/ /home/eplexsoft/eplexsoft.com/staticfiles/
+
+<Directory /home/eplexsoft/eplexsoft.com/staticfiles>
+    Require all granted
+</Directory>
+
+# DO NOT REMOVE OR MODIFY. CLOUDLINUX ENV VARS CONFIGURATION BEGIN
+<IfModule Litespeed>
+</IfModule>
+# DO NOT REMOVE OR MODIFY. CLOUDLINUX ENV VARS CONFIGURATION END
