@@ -182,7 +182,7 @@
         const yearly = this.checked;
         const vals = Object.values(prices);
         amounts.forEach((el, i) => {
-        el.innerHTML = `<span>$</span>${yearly ? vals[i][1] : vals[i][0]}`;
+        el.innerHTML = `<span>৳</span>${yearly ? vals[i][1] : vals[i][0]}`;
         });
         document.querySelectorAll('.price-period').forEach(el => {
         el.textContent = yearly ? '/ year (billed annually)' : '/ month';
