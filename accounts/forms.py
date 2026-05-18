@@ -1,24 +1,28 @@
 from django import forms
-from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
-from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
-from .models import Profile
+from django.contrib.auth.forms import UserCreationForm
+from accounts.models import User
+
 
 class RegistrationForm(UserCreationForm):
     email = forms.EmailField(required=True)
 
     class Meta:
         model = User
-        fields = ['username', 'email', 'password1', 'password2']
+        fields = ['username', 'email', 'phone', 'address', 'password1', 'password2']
+        widgets = {
+            'address': forms.Textarea(attrs={'rows': 3}),
+        }
 
     def clean_email(self):
         email = self.cleaned_data.get('email')
         if User.objects.filter(email=email).exists():
-            raise forms.ValidationError("Email already exists")
+            raise forms.ValidationError("Email already exists.")
         return email
-    
+
+
 class LoginForm(forms.Form):
-    email = forms.EmailField(label='Email', max_length=150, widget=forms.EmailInput(attrs={'autofocus': True}))
+    email = forms.EmailField(label='Email',max_length=150,widget=forms.EmailInput(attrs={'autofocus': True}))
     password = forms.CharField(label='Password', widget=forms.PasswordInput())
 
     def __init__(self, request=None, *args, **kwargs):
@@ -51,25 +55,20 @@ class LoginForm(forms.Form):
     def get_user(self):
         return self.user
 
+
 class UserUpdateForm(forms.ModelForm):
     email = forms.EmailField(required=True)
 
     class Meta:
-        model  = User
-        fields = ['username', 'email']
+        model = User
+        fields = ['username', 'email', 'phone', 'address', 'image']
+        widgets = {
+            'address': forms.Textarea(attrs={'rows': 3}),
+        }
 
     def clean_email(self):
         email = self.cleaned_data.get('email')
         qs = User.objects.filter(email=email).exclude(pk=self.instance.pk)
         if qs.exists():
-            raise forms.ValidationError('This email is already in use.')
+            raise forms.ValidationError("This email is already in use.")
         return email
-    
-    
-class ProfileUpdateForm(forms.ModelForm):
-    class Meta:
-        model  = Profile
-        fields = ['image', 'phone', 'address']
-        widgets = {
-            'address': forms.Textarea(attrs={'rows': 3}),
-        }

@@ -1,0 +1,382 @@
+/* ================================================================
+   support_table.css  —  Support ticket list + reply modal
+   ================================================================ */
+
+
+/* ── Card ─────────────────────────────────────────────────────── */
+.support-card {
+  background: #ffffff;
+  border: 1px solid #e9ecef;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 1px 4px rgba(0,0,0,.06);
+}
+
+.support-card-header {
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid #e9ecef;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: .75rem;
+  background: #ffffff;
+}
+
+.support-card-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: #1a1a2e;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+
+/* ── Filter tabs ──────────────────────────────────────────────── */
+.support-filter-tabs {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+}
+
+.support-filter-tab {
+  font-size: 12px;
+  padding: 5px 14px;
+  border-radius: 20px;
+  border: 1px solid #dee2e6;
+  background: transparent;
+  color: #6c757d;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background .15s, color .15s, border-color .15s;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.support-filter-tab:hover {
+  background: #f8f9fa;
+  color: #343a40;
+  text-decoration: none;
+}
+
+.support-filter-tab.active {
+  background: #1a1a2e;
+  color: #ffffff;
+  border-color: #1a1a2e;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.tab-count {
+  font-size: 11px;
+  background: rgba(255,255,255,.25);
+  color: inherit;
+  padding: 1px 6px;
+  border-radius: 10px;
+}
+
+.support-filter-tab:not(.active) .tab-count {
+  background: #f1f3f5;
+  color: #6c757d;
+}
+
+
+/* ── Table ────────────────────────────────────────────────────── */
+.support-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 0;
+}
+
+.support-table thead tr {
+  background: #f8f9fa;
+}
+
+.support-table thead th {
+  font-size: 11px;
+  font-weight: 600;
+  color: #6c757d;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  padding: 11px 16px;
+  text-align: left;
+  border-bottom: 1px solid #e9ecef;
+  white-space: nowrap;
+}
+
+.support-table tbody tr {
+  border-bottom: 1px solid #f1f3f5;
+  transition: background .12s;
+}
+
+.support-table tbody tr:last-child { border-bottom: none; }
+.support-table tbody tr:hover      { background: #f8f9fa; }
+
+.support-table td {
+  padding: 13px 16px;
+  font-size: 13px;
+  color: #343a40;
+  vertical-align: middle;
+}
+
+.support-sl {
+  color: #adb5bd;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+
+/* ── User / avatar cell ───────────────────────────────────────── */
+.support-user-cell {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.support-avatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+  flex-shrink: 0;
+  text-transform: uppercase;
+}
+
+.support-avatar-blue   { background: #cfe2ff; color: #084298; }
+.support-avatar-teal   { background: #d1e7dd; color: #0a3622; }
+.support-avatar-coral  { background: #f8d7da; color: #58151c; }
+.support-avatar-purple { background: #e2d9f3; color: #432874; }
+.support-avatar-amber  { background: #fff3cd; color: #664d03; }
+
+.support-user-name  { font-size: 13px; font-weight: 600; color: #1a1a2e; line-height: 1.3; }
+.support-user-email { font-size: 11px; color: #868e96; line-height: 1.3; }
+.support-contact    { font-size: 12px; color: #6c757d; white-space: nowrap; }
+
+.support-problem {
+  max-width: 210px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-size: 12px;
+  color: #6c757d;
+}
+
+
+/* ── Status badges ────────────────────────────────────────────── */
+.support-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 4px 10px;
+  border-radius: 20px;
+  white-space: nowrap;
+}
+
+.support-badge-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.support-badge-pending    { background: #fff3cd; color: #664d03; }
+.support-badge-pending    .support-badge-dot { background: #ffc107; }
+
+.support-badge-on_progress { background: #cff4fc; color: #055160; }
+.support-badge-on_progress .support-badge-dot { background: #0dcaf0; }
+
+.support-badge-solved       { background: #d1e7dd; color: #0a3622; }
+.support-badge-solved   .support-badge-dot { background: #198754; }
+
+.support-badge-closed     { background: #f1f3f5; color: #495057; }
+.support-badge-closed     .support-badge-dot { background: #adb5bd; }
+
+
+/* ── Attachment ───────────────────────────────────────────────── */
+.support-attach-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  color: #495057;
+  text-decoration: none;
+  padding: 3px 8px;
+  border-radius: 6px;
+  border: 1px solid #dee2e6;
+  transition: background .12s, border-color .12s;
+}
+
+.support-attach-link:hover {
+  background: #f1f3f5;
+  border-color: #adb5bd;
+  color: #212529;
+}
+
+.support-no-attach { font-size: 13px; color: #ced4da; }
+
+
+/* ── Eye / action button ──────────────────────────────────────── */
+.support-action-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  border: 1px solid #dee2e6;
+  background: transparent;
+  color: #6c757d;
+  cursor: pointer;
+  transition: background .12s, color .12s, border-color .12s;
+  font-size: 15px;
+  padding: 0;
+}
+
+.support-action-btn:hover {
+  background: #f1f3f5;
+  color: #1a1a2e;
+  border-color: #adb5bd;
+}
+
+
+/* ── Empty state ──────────────────────────────────────────────── */
+.support-empty {
+  text-align: center;
+  padding: 3rem 1rem;
+  color: #adb5bd;
+}
+
+.support-empty-icon { font-size: 2.5rem; display: block; margin-bottom: .5rem; }
+.support-empty-text { font-size: 13px; }
+
+
+/* ================================================================
+   REPLY MODAL
+   ================================================================ */
+
+.support-modal .modal-content {
+  border: 1px solid #e9ecef;
+  border-radius: 12px;
+  box-shadow: 0 8px 32px rgba(0,0,0,.12);
+}
+
+.support-modal .modal-header {
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid #e9ecef;
+  border-radius: 12px 12px 0 0;
+  background: #ffffff;
+}
+
+.support-modal .modal-title {
+  font-size: 15px;
+  font-weight: 600;
+  color: #1a1a2e;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.support-modal .modal-body  { padding: 1.25rem; background: #ffffff; }
+
+.support-modal .modal-footer {
+  padding: .875rem 1.25rem;
+  border-top: 1px solid #e9ecef;
+  background: #ffffff;
+  border-radius: 0 0 12px 12px;
+}
+
+
+/* ── Submitted-by strip ───────────────────────────────────────── */
+.modal-user-strip {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  background: #f8f9fa;
+  border-radius: 8px;
+  margin-bottom: 1.25rem;
+  border: 1px solid #e9ecef;
+}
+
+.modal-user-strip .support-avatar { width: 38px; height: 38px; font-size: 13px; }
+
+.modal-user-strip-label { font-size: 10px; text-transform: uppercase; letter-spacing: .07em; color: #adb5bd; margin-bottom: 2px; }
+.modal-user-strip-name  { font-size: 13px; font-weight: 600; color: #1a1a2e; line-height: 1.3; }
+.modal-user-strip-email { font-size: 11px; color: #868e96; line-height: 1.3; }
+
+
+/* ── Detail field grid ────────────────────────────────────────── */
+.modal-field-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 1rem; }
+.modal-field-full { grid-column: 1 / -1; }
+
+.modal-field-label {
+  font-size: 10px;
+  text-transform: uppercase;
+  letter-spacing: .07em;
+  color: #adb5bd;
+  display: block;
+  margin-bottom: 3px;
+}
+
+.modal-field-value         { font-size: 13px; color: #343a40; line-height: 1.5; }
+.modal-field-value-problem { font-size: 13px; color: #343a40; line-height: 1.6; white-space: pre-wrap; }
+
+
+/* ── Previous remarks callout ─────────────────────────────────── */
+.modal-prev-remarks-wrap  { margin-bottom: 1rem; }
+
+.modal-prev-remarks-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: #664d03;
+  margin-bottom: 6px;
+  display: block;
+}
+
+.modal-prev-remarks {
+  background: #fffbea;
+  border-left: 3px solid #ffc107;
+  padding: 10px 14px;
+  border-radius: 0 6px 6px 0;
+  font-size: 13px;
+  color: #495057;
+  white-space: pre-wrap;
+  line-height: 1.6;
+}
+
+
+/* ── Reply form labels ────────────────────────────────────────── */
+.modal-form-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #495057;
+  display: block;
+  margin-bottom: 5px;
+}
+
+.modal-section-title {
+  font-size: 13px;
+  font-weight: 700;
+  color: #1a1a2e;
+  margin-bottom: 1rem;
+  padding-bottom: 8px;
+  border-bottom: 1px solid #e9ecef;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+/* Status select colour hints */
+.modal-status-pending    { color: #664d03; }
+.modal-status-in_process { color: #055160; }
+.modal-status-resolved   { color: #0a3622; }
+.modal-status-closed     { color: #495057; }

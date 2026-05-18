@@ -9,7 +9,9 @@
     </title>
     <link rel="icon" type="image/png" href="{% static 'img/e_plex.jpeg' %}">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css"/>
+    {% block extra_css %}
     
+    {% endblock %}
     {% comment %} <link rel="stylesheet" href="{% static 'css/styles.css' %}"/> {% endcomment %}
     <link rel="stylesheet" href="{% static 'css/e_plex.css' %}"/>
     <link rel="stylesheet" href="{% static 'css/accounts.css' %}"/>
@@ -67,15 +69,18 @@
                                 </a>
                             </li>
                             <li>
-                                <a class="dropdown-item" style="font-size: 14px;" target="_blank" href="https://script.google.com/a/macros/odell.com.bd/s/AKfycbwgKUxgtP4KGBf3Vh0Bwa7-7gtLwy1IBQfmxjCExu_2galynKosBW6LrU27kP4S01aE/exec">
+                                {% comment %} <a class="dropdown-item" style="font-size: 14px;" target="_blank" href="https://script.google.com/a/macros/odell.com.bd/s/AKfycbwgKUxgtP4KGBf3Vh0Bwa7-7gtLwy1IBQfmxjCExu_2galynKosBW6LrU27kP4S01aE/exec">
+                                    <i class="bi bi-headset me-1"></i> &nbsp;Support
+                                </a> {% endcomment %}
+                                <a class="dropdown-item" style="font-size: 14px;" target="_blank" href="{% url 'support_create_url' %}">
                                     <i class="bi bi-headset me-1"></i> &nbsp;Support
                                 </a>
                             </li>
-                            {% comment %} <li>
+                            <li>
                                 <a class="dropdown-item" style="font-size: 14px;" href="{% url 'dashboard_url' %}">
                                     <i class="bi bi-grid me-2"></i> Dashboard
                                 </a>
-                            </li> {% endcomment %}
+                            </li>
                             {% comment %} <li>
                                 <a class="dropdown-item" href="{% url 'settings_url' %}">
                                     <i class="bi bi-gear me-2"></i> Settings

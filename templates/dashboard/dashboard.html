@@ -14,11 +14,30 @@
             <div class="col-md-3">
                 <div class="stat-card">
                     <div class="stat-top"><span class="stat-label">Total Tickets</span><div class="stat-icon si-blue"><i class="bi bi-ticket"></i></div></div>
-                    <div class="stat-value">10</div>
+                    <div class="stat-value">{{ticket}}</div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stat-card">
+                    <div class="stat-top"><span class="stat-label">Pending Tickets</span><div class="stat-icon si-blue"><i class="bi bi-ticket"></i></div></div>
+                    <div class="stat-value">{{pending}}</div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stat-card">
+                    <div class="stat-top"><span class="stat-label">In Progress Tickets</span><div class="stat-icon si-blue"><i class="bi bi-ticket"></i></div></div>
+                    <div class="stat-value">{{in_progress}}</div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="stat-card">
+                    <div class="stat-top"><span class="stat-label">Solved Tickets</span><div class="stat-icon si-blue"><i class="bi bi-ticket"></i></div></div>
+                    <div class="stat-value">{{solved}}</div>
                 </div>
             </div>
         </div>
-        
+    </div>
+    
         {% comment %} <div class="stat-card">
         <div class="stat-top"><span class="stat-label">Active Users</span><div class="stat-icon si-teal"><svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg></div></div>
         <div class="stat-value">3,482</div>

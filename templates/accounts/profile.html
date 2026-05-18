@@ -10,24 +10,25 @@
 
 <div class="card">
   {% if messages %}
-      {% for message in messages %}
-        <div class="alert text-center">{{ message }}</div>
-      {% endfor %}
-    {% endif %}
+    {% for message in messages %}
+      <div class="alert text-center">{{ message }}</div>
+    {% endfor %}
+  {% endif %}
+
   <div class="header">
     <div class="header-left">
 
-      {% if request.user.profile.image %}
-        <img src="{{ request.user.profile.image.url }}" class="avatar-circle" id="preview">
+      {% if form.instance.image %}
+        <img src="{{ form.instance.image.url }}" class="avatar-circle" id="preview">
       {% else %}
         <div class="avatar-circle" id="previewText">
-          {{ request.user.username|first|upper }}
+          {{ form.instance.username|first|upper }}
         </div>
       {% endif %}
 
       <div class="header-info">
-        <span class="header-name">{{ user_form.username.value }}</span>
-        <span class="header-email">{{ user_form.email.value }}</span>
+        <span class="header-name">{{ form.instance.username }}</span>
+        <span class="header-email">{{ form.instance.email }}</span>
       </div>
     </div>
 
@@ -41,15 +42,13 @@
           <circle cx="12" cy="8" r="4"/>
           <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
         </svg>
-
         <div class="upload-badge">
           <i class="bi bi-arrow-up-circle"></i>
         </div>
       </div>
 
-
-      {% if profile_form.image.errors %}
-        <span class="error">{{ profile_form.image.errors.0 }}</span>
+      {% if form.image.errors %}
+        <span class="error">{{ form.image.errors.0 }}</span>
       {% endif %}
     </div>
   </div>
@@ -63,27 +62,27 @@
       <!-- Username -->
       <div class="field">
         <label>Username</label>
-        <input type="text" name="username" value="{{ user_form.username.value }}">
-        {% if user_form.username.errors %}
-          <span class="error">{{ user_form.username.errors.0 }}</span>
+        <input type="text" name="username" value="{{ form.instance.username }}">
+        {% if form.username.errors %}
+          <span class="error">{{ form.username.errors.0 }}</span>
         {% endif %}
       </div>
 
       <!-- Email -->
       <div class="field">
         <label>Email Address</label>
-        <input type="email" name="email" value="{{ user_form.email.value }}">
-        {% if user_form.email.errors %}
-          <span class="error">{{ user_form.email.errors.0 }}</span>
+        <input type="email" name="email" value="{{ form.instance.email }}">
+        {% if form.email.errors %}
+          <span class="error">{{ form.email.errors.0 }}</span>
         {% endif %}
       </div>
 
       <!-- Phone -->
       <div class="field">
         <label>Phone Number</label>
-        <input type="tel" name="phone" value="{{ profile_form.phone.value|default:'' }}">
-        {% if profile_form.phone.errors %}
-          <span class="error">{{ profile_form.phone.errors.0 }}</span>
+        <input type="tel" name="phone" value="{{ form.instance.phone|default:'' }}">
+        {% if form.phone.errors %}
+          <span class="error">{{ form.phone.errors.0 }}</span>
         {% endif %}
       </div>
 
@@ -91,12 +90,10 @@
       <div class="field field-address">
         <label>Address</label>
         <div class="address-inner">
-          <textarea name="address">
-          {{ profile_form.address.value|default:'' }}
-          </textarea>
+          <textarea name="address">{{ form.instance.address|default:'' }}</textarea>
         </div>
-        {% if profile_form.address.errors %}
-          <span class="error">{{ profile_form.address.errors.0 }}</span>
+        {% if form.address.errors %}
+          <span class="error">{{ form.address.errors.0 }}</span>
         {% endif %}
       </div>
 
@@ -109,12 +106,10 @@
   </div>
 
 </div>
-
 </form>
 
 <!-- Image Preview Script -->
 <script>
-
 document.getElementById('id_image').addEventListener('change', function(e) {
   const [file] = e.target.files;
   if (file) {
