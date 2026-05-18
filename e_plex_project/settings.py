@@ -76,7 +76,10 @@ DATABASES = {
         'USER': 'odelltec_rasel',
         'PASSWORD': 'rasel@5437',
         'HOST': '127.0.0.1',
-        'PORT': '3306'
+        'PORT': '3306',
+        'OPTIONS': {
+            'sql_mode': 'STRICT_TRANS_TABLES',
+        },
     }
 }
 
@@ -98,6 +101,8 @@ AUTH_PASSWORD_VALIDATORS = [
         'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
     },
 ]
+
+AUTH_USER_MODEL = 'accounts.User'
 
 
 # Internationalization

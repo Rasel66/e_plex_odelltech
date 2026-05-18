@@ -1,0 +1,140 @@
+{% extends "dashboard.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %}Create Support{% endblock  %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'css/dashboard/support.css' %}"/>
+{% endblock %}
+
+{% block content %}
+<h2 class="sr-only" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)">E-Plex support request form with hero section and input fields</h2>
+
+<div class="wrap">
+  <div class="hero">
+    <div class="logo-wrap">
+      <span class="logo-name fw-bold">E-Plex</span>
+    </div>
+    <p class="tagline">Your Store.<br><span class="hi">Your Way.</span></p>
+    <div class="features">
+      <div class="feat"><div class="feat-icon"><i class="bi bi-basket2 fs-5" style="color:#ffffff"></i></div><div class="feat-text">Modern e-commerce solutions</div></div>
+      <div class="feat"><div class="feat-icon"><i class="bi bi-rocket-takeoff fs-5" style="color:#ffffff"></i></div><div class="feat-text">Fast & reliable service</div></div>
+      <div class="feat"><div class="feat-icon"><i class="bi bi-headset fs-5" style="color:#ffffff"></i></div><div class="feat-text">24/7 customer support</div></div>
+    </div>
+    <div class="hero-footer">
+      <p>Trusted by thousands of merchants. We're here whenever you need us — submit a ticket and our team responds promptly.</p>
+    </div>
+  </div>
+
+  <div class="form-side">
+    <div class="form-head">
+      <h1 class="form-title fw-bold">E-Plex Support</h1>
+      <p class="form-sub">We're here to help</p>
+      <p class="form-desc">Need help? Submit your request by filling out this form with the required details about your business and the issue you're facing.</p>
+      <div class="privacy"><strong>Privacy notice:</strong> Your account information may be recorded when you submit this form.</div>
+    </div>
+
+    <div class="alert-box" id="alert"></div>
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      <div class="row">
+        <div class="col-md-6">
+          {{form.name|as_crispy_field}}
+        </div>
+        <div class="col-md-6">
+          {{form.enlisted_email|as_crispy_field}}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-6">
+          {{form.contact_no|as_crispy_field}}
+        </div>
+        <div class="col-md-6">
+          {{form.business_name|as_crispy_field}}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          {{form.problem_statement|as_crispy_field}}
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-12">
+          {{form.attachment|as_crispy_field}}
+        </div>
+      </div>
+
+      <button type="submit" class="submit-btn">
+        <div class="spin" id="spinner"></div>Submit support request
+      </button>
+    </form>
+  </div>
+</div>
+
+{% endblock  %}
+
+{% block JS %}
+<script>
+document.getElementById('s-file').addEventListener('change', function(){
+  const nm = this.files[0]?.name;
+  document.getElementById('fileName').textContent = nm || 'Choose file…';
+});
+
+function showAlert(msg, ok){
+  const a = document.getElementById('alert');
+  a.style.display = 'block';
+  a.style.background = ok ? 'var(--color-background-success)' : 'var(--color-background-danger)';
+  a.style.color = ok ? 'var(--color-text-success)' : 'var(--color-text-danger)';
+  a.style.border = ok ? '0.5px solid var(--color-border-success)' : '0.5px solid var(--color-border-danger)';
+  a.textContent = msg;
+}
+
+function handleSubmit(){
+  const name = document.getElementById('s-name').value.trim();
+  const email = document.getElementById('s-email').value.trim();
+  const contact = document.getElementById('s-contact').value.trim();
+  const prob = document.getElementById('s-prob').value.trim();
+  if(!name || !email || !contact || !prob){
+    showAlert('Please fill in all required fields.', false);
+    return;
+  }
+  const btn = document.getElementById('submitBtn');
+  btn.disabled = true;
+  document.getElementById('spinner').style.display = 'block';
+  document.getElementById('sendIcon').style.display = 'none';
+  document.getElementById('btnText').textContent = 'Submitting…';
+  setTimeout(()=>{
+    btn.disabled = false;
+    document.getElementById('spinner').style.display = 'none';
+    document.getElementById('sendIcon').style.display = 'block';
+    document.getElementById('btnText').textContent = 'Submit support request';
+    showAlert('Your request has been submitted! We\'ll get back to you shortly.', true);
+  }, 1800);
+}
+
+</script>
+
+{% if messages %}
+    {% for message in messages %}
+        <script>
+            Toastify({
+                text: "{{ message }}",
+                duration: 3000,
+                close: true,
+                gravity: "top",
+                position: "right",
+
+                backgroundColor:
+                    "{% if message.tags == 'success' %}green
+                    {% elif message.tags == 'error' %}red
+                    {% elif message.tags == 'warning' %}orange
+                    {% else %}blue
+                    {% endif %}"
+
+            }).showToast();
+        </script>
+
+    {% endfor %}
+{% endif %}
+
+{% endblock %}

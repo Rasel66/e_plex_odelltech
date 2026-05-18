@@ -13,7 +13,9 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-
+    {% block extra_css %}
+    
+    {% endblock %}
     <link rel="stylesheet" href="{% static 'css/dashboard.css' %}"/>
     <link rel="stylesheet" href="{% static 'css/dashboard_all.css' %}"/>
 
@@ -46,10 +48,12 @@
                 <div class="submenu" id="sub-services">
                     <a class="sub-item" href="#">Overview</a>
                     <a class="sub-item" href="#">ePlex Services</a>
+                    <a class="sub-item" href="{% url 'support_create_url' %}">Create Support</a>
+                    <a class="sub-item" href="{% url 'support_list_url' %}">Support List</a>
                 </div>
             </div>
 
-            <div class="nav-section">
+            {% comment %} <div class="nav-section">
                 <div class="nav-section-title">Account</div>
 
                 <a class="nav-item" href="{% url 'account_details_url' %}" data-page="Account Details">
@@ -83,7 +87,7 @@
                     <span class="nav-icon"><i class="bi bi-globe-central-south-asia"></i></span>
                     <span class="nav-label">E-Plex</span>
                 </a>
-            </div>
+            </div> {% endcomment %}
 
         </div>
 
@@ -234,7 +238,9 @@
     </div>
     </div>
 
-
+    {% block JS %}
+    
+    {% endblock %}
 
 
     <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
