@@ -9,8 +9,6 @@
 {% block content %}
 
 <div class="support-card m-2">
-
-  {# ── Header ── #}
   <div class="support-card-header">
     <h5 class="support-card-title">
       <i class="bi bi-headset"></i>
@@ -51,22 +49,26 @@
     <table class="support-table">
       <thead>
         <tr>
-          <th>SL</th>
-          <th>Submitted by</th>
+          <th style="width: 8%">Support ID</th>
+          <th style="width: 15%">Submitted by</th>
           <th>Contact</th>
           <th>Problem</th>
+          <th>Solution</th>
+          {% if request.user.user_type == 'support' %}
           <th>Supported By</th>
+          {% endif %}
           <th>Status</th>
           <th>Attachment</th>
           {% if request.user.user_type == 'support' %}
           <th>Reply</th>
+          {% comment %} <th>Action</th> {% endcomment %}
           {% endif %}
         </tr>
       </thead>
       <tbody>
         {% for obj in obj_list %}
         <tr>
-            <td class="support-sl">{{ forloop.counter|stringformat:"02d" }}</td>
+            <td class="support-sl">{{ obj.support_id }}</td>
             <td>
                 <div class="support-user-cell">
                 <div>
@@ -79,10 +81,34 @@
             </td>
             <td class="support-contact">{{ obj.contact_no }}</td>
             <td>
-                <div class="support-problem" title="{{ obj.problem_statement }}">
-                {{ obj.problem_statement }}
-                </div>
+                <button
+                    type="button"
+                    class="btn btn-sm btn-info text-white"
+                    data-bs-toggle="modal"
+                    data-bs-target="#problemModal"
+                    data-title="Problem Statement"
+                    data-content="{{ obj.problem_statement }}"
+                >
+                    View Problem
+                </button>
             </td>
+            <td>
+                {% if obj.remarks %}
+                <button
+                    type="button"
+                    class="btn btn-sm btn-success"
+                    data-bs-toggle="modal"
+                    data-bs-target="#problemModal"
+                    data-title="Solution"
+                    data-content="{{ obj.remarks }}"
+                >
+                    View Solution
+                </button>
+                {% else %}
+                    <span class="support-no-attach">—</span>
+                {% endif %}
+            </td>
+            {% if request.user.user_type == 'support' %}
             <td>
                 {% if obj.user %}
                     <div class="support-user-cell">
@@ -94,6 +120,7 @@
                     <span class="support-no-attach">—</span>
                 {% endif %}
             </td>
+            {% endif %}
 
             <td>
                 <span class="support-badge support-badge-{{ obj.status }}">
@@ -135,11 +162,21 @@
                 <i class="bi bi-reply"></i>
                 </button>
             </td>
+            {% comment %} <td>
+                <a href="{% url 'update_color_url' obj.id %}" class="edit_btn" title="Edit">
+                    <i class="fas fa-edit"></i>
+                </a>
+
+                <a href="{% url 'support_delete_url' obj.id %}" class="btn btn-danger btn-sm" title="Delete" 
+                    onclick="SweetDelete(event, this.href)">Delete
+                </a>
+
+            </td> {% endcomment %}
             {% endif %}
         </tr>
         {% empty %}
         <tr>
-          <td colspan="{% if request.user.user_type == 'support' %}7{% else %}6{% endif %}">
+          <td colspan="{% if request.user.user_type == 'support' %}9{% else %}7{% endif %}">
             <div class="support-empty">
               <i class="bi bi-inbox support-empty-icon"></i>
               <p class="support-empty-text">
@@ -152,6 +189,63 @@
       </tbody>
     </table>
   </div>
+
+  {% if is_paginated %}
+<div class="d-flex justify-content-between align-items-center my-3 mx-2 flex-wrap">
+
+    <!-- Left Side Text -->
+    <div class="mb-2">
+        <small class="text-muted">
+            Showing page {{ page_obj.number }} of {{ page_obj.paginator.num_pages }}
+        </small>
+    </div>
+
+    <nav>
+        <ul class="pagination mb-0">
+
+            {% if page_obj.has_previous %}
+                <li class="page-item">
+                    <a class="page-link"
+                       href="?page=1&status={{ active_filter }}">
+                        First
+                    </a>
+                </li>
+
+                <li class="page-item">
+                    <a class="page-link"
+                       href="?page={{ page_obj.previous_page_number }}&status={{ active_filter }}">
+                        Previous
+                    </a>
+                </li>
+            {% endif %}
+
+            <li class="page-item active">
+                <span class="page-link">
+                    {{ page_obj.number }}
+                </span>
+            </li>
+
+            {% if page_obj.has_next %}
+                <li class="page-item">
+                    <a class="page-link"
+                       href="?page={{ page_obj.next_page_number }}&status={{ active_filter }}">
+                        Next
+                    </a>
+                </li>
+
+                <li class="page-item">
+                    <a class="page-link"
+                       href="?page={{ page_obj.paginator.num_pages }}&status={{ active_filter }}">
+                        Last
+                    </a>
+                </li>
+            {% endif %}
+
+        </ul>
+    </nav>
+
+</div>
+{% endif %}
 
 </div>
 
@@ -267,9 +361,28 @@
         </div>
     </div>
 </div>
-{% endif %}
-{# ═════════════ #}
 
+
+{% endif %}
+
+{# ── View reply modal ── #}
+
+<div class="modal fade" id="problemModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h5 class="modal-title" id="problemModalTitle"></h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+            </div>
+
+            <div class="modal-body">
+                <div id="problemModalContent" style="white-space: pre-wrap;"></div>
+            </div>
+
+        </div>
+    </div>
+</div>
 {% endblock %}
 
 
@@ -339,5 +452,21 @@
   });
 </script>
 {% endif %}
+
+
+
+<script>
+    const problemModal = document.getElementById('problemModal');
+    problemModal.addEventListener('show.bs.modal', function (event) {
+      const button = event.relatedTarget;
+
+      const title = button.getAttribute('data-title');
+      const content = button.getAttribute('data-content');
+
+      document.getElementById('problemModalTitle').textContent = title;
+      document.getElementById('problemModalContent').textContent = content;
+    });
+</script>
+
 
 {% endblock %}
