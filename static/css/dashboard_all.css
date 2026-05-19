@@ -90,6 +90,30 @@
     padding: 4px;
 }
 
+/* Notifications */
+.topbar-btn{
+    position: relative;
+}
+
+.notif-dot{
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background: red;
+    color: #fff;
+    min-width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    font-size: 11px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2px;
+    font-weight: 600;
+}
+
+/* pagination style */
+
 
 
 /* Body */

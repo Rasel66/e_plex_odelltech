@@ -98,7 +98,7 @@
                         </ul>
                     </div>
                 {% else %}
-                    <a href="https://script.google.com/a/macros/odell.com.bd/s/AKfycby47jM8unDQaTpeQu-2PILNL_Fs6O7Lckis_IFCuyKXmHVxqzGDgZAQAikAwD4J9zza/exec" target="_blank" class="nav-link btn-nav ms-2">Get it now</a>
+                    <a href="" target="_blank" id="getItNowBtn" class="nav-link btn-nav ms-2">Get it now</a>
                     <a href="{% url 'login_url' %}" class="nav-link btn-signin ms-3">
                         <i class="bi bi-person me-1"></i> Sign In
                     </a>
@@ -163,6 +163,65 @@
         </div>
     </div>
     </footer>
+
+    <!-- GET IT NOW MODAL -->
+
+    <div class="modal fade" id="getItNowModal" tabindex="-1" aria-labelledby="getItNowModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content git-modal-content">
+            <button type="button" class="btn-close git-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        
+            <div class="row g-0 h-100">
+                <div class="col-md-5 git-left d-none d-md-flex flex-column justify-content-center align-items-center">
+                <img src="{% static 'img/base9.jpg' %}" alt="" class="git-illustration"
+                    onerror="this.style.display='none'">
+                </div>
+        
+                <div class="col-md-7 git-right">
+                <h2 class="git-title" id="getItNowModalLabel">Get In Touch</h2>
+                <p class="git-sub">We'd love to hear from you. Send us a message!</p>
+        
+                <form id="getItNowForm" method="post" action="{% url 'get_it_now_submit_url' %}" novalidate>
+                    {% csrf_token %}
+        
+                    <div class="git-field">
+                    <label class="git-label">Full Name <span class="required">*</span></label>
+                    <input type="text" name="full_name" class="git-input" placeholder="Enter your name" required>
+                    <span class="git-error" id="err-name"></span>
+                    </div>
+        
+                    <div class="git-field">
+                    <label class="git-label">Contact Number <span class="required">*</span></label>
+                    <input type="tel" name="contact_number" class="git-input" placeholder="Enter your phone number" required>
+                    <span class="git-error" id="err-phone"></span>
+                    </div>
+        
+                    <div class="git-field">
+                    <label class="git-label">Email Address</label>
+                    <input type="email" name="email" class="git-input" placeholder="Enter your email address">
+                    <span class="git-error" id="err-email"></span>
+                    </div>
+        
+                    <div class="git-field">
+                    <label class="git-label">Message</label>
+                    <textarea name="message" class="git-input git-textarea" placeholder="Tell us how we can help..."></textarea>
+                    </div>
+        
+                    <button type="submit" class="git-btn" id="gitSubmitBtn">
+                    <span class="btn-text">Send Message</span>
+                    <span class="btn-spinner d-none">
+                        <span class="spinner-border spinner-border-sm" role="status"></span>
+                    </span>
+                    </button>
+                </form>
+                </div>
+        
+            </div>
+            </div>
+        </div>
+    </div>
+
+    
     <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
     <script>
@@ -193,6 +252,87 @@
         el.textContent = yearly ? '/ year (billed annually)' : '/ month';
         });
     });
+
+    // MODAL JS
+
+    (function () {
+        document.querySelectorAll('#getItNowBtn').forEach(function (btn) {
+            btn.addEventListener('click', function (e) {
+            if (btn.classList.contains('btn-nav')) {
+                e.preventDefault();
+                var modal = new bootstrap.Modal(document.getElementById('getItNowModal'));
+                modal.show();
+            }
+            });
+        });
+        
+        var form = document.getElementById('getItNowForm');
+        if (!form) return;
+        
+        form.addEventListener('submit', function (e) {
+            e.preventDefault();
+            if (!validateGitForm()) return;
+        
+            var btn = document.getElementById('gitSubmitBtn');
+            var btnText = btn.querySelector('.btn-text');
+            var spinner = btn.querySelector('.btn-spinner');
+        
+            btn.disabled = true;
+            btnText.classList.add('d-none');
+            spinner.classList.remove('d-none');
+        
+            var data = new FormData(form);
+        
+            fetch(form.action, {
+                method: 'POST',
+                headers: { 'X-CSRFToken': data.get('csrfmiddlewaretoken') },
+                body: data,
+            })
+            .then(function (res) { return res.json(); })
+            .then(function (json) {
+                btn.disabled = false;
+                btnText.classList.remove('d-none');
+                spinner.classList.add('d-none');
+            
+                if (json.success) {
+                    Toastify({ text: json.message || 'Message sent!', duration: 3500, gravity: 'top', position: 'right', backgroundColor: 'green' }).showToast();
+                    form.reset();
+                    bootstrap.Modal.getInstance(document.getElementById('getItNowModal')).hide();
+                } else {
+                    Toastify({ text: json.message || 'Something went wrong.', duration: 3500, gravity: 'top', position: 'right', backgroundColor: 'red' }).showToast();
+                }
+            })
+            .catch(function () {
+                btn.disabled = false;
+                btnText.classList.remove('d-none');
+                spinner.classList.add('d-none');
+                Toastify({ text: 'Network error. Please try again.', duration: 3500, gravity: 'top', position: 'right', backgroundColor: 'red' }).showToast();
+            });
+        });
+        
+        function validateGitForm() {
+            var ok = true;
+            document.querySelectorAll('.git-error').forEach(function (el) { el.textContent = ''; });
+        
+            var name  = form.querySelector('[name="full_name"]');
+            var phone = form.querySelector('[name="contact_number"]');
+            var email = form.querySelector('[name="email"]');
+        
+            if (!name.value.trim()) {
+            document.getElementById('err-name').textContent = 'Full name is required.';
+            ok = false;
+            }
+            if (!phone.value.trim()) {
+            document.getElementById('err-phone').textContent = 'Contact number is required.';
+            ok = false;
+            }
+            if (email.value && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value)) {
+            document.getElementById('err-email').textContent = 'Enter a valid email address.';
+            ok = false;
+            }
+            return ok;
+        }
+        })();
     </script>
     <script>
         {% if messages %}
@@ -210,6 +350,7 @@
         {% endif %}
     </script>
     <script src="{% static 'js/script.js' %}"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     {% block JS %}
     

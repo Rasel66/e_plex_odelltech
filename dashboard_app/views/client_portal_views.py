@@ -1,3 +1,7 @@
+import json
+from django.http import JsonResponse
+from django.utils import timezone
+from django.views.decorators.http import require_POST
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
@@ -43,10 +47,10 @@ def dashboard_view(request):
 def support_create_view(request):
     if request.method == "POST":
         form = dashboard_forms.SupportForm(request.POST, request.FILES)
-        if form.is_valid:
+        if form.is_valid():
             form.save()
             messages.success(request, 'Support request submitted successfully!')
-            return redirect('support_create_url')
+            return redirect('home_page_url')
         else:
             messages.error(request, "Invalid form")
     else:
@@ -62,10 +66,11 @@ class SupportListView(ListView):
     model = dashboard_models.Support
     template_name = 'dashboard/support_list.html'
     context_object_name = 'obj_list'
+    paginate_by = 30
  
     def get_queryset(self):
         status_filter = self.request.GET.get('status', 'all')
-        qs = dashboard_models.Support.objects.select_related('user').all()
+        qs = dashboard_models.Support.objects.select_related('user').all().order_by('-id')
  
         if not is_support_user(self.request.user):
             qs = qs.filter(Q(enlisted_email=self.request.user.email))
@@ -80,9 +85,9 @@ class SupportListView(ListView):
         ctx['status_choices'] = choices.SUPPORT_STATUS_CHOICE
         ctx['active_filter']  = self.request.GET.get('status', 'all')
  
-        base_qs = dashboard_models.Support.objects.all()
+        base_qs = dashboard_models.Support.objects.all().order_by('-id')
         if not is_support_user(self.request.user):
-            base_qs = base_qs.filter(Q(enlisted_email=self.request.user.email))
+            base_qs = base_qs.filter(Q(enlisted_email=self.request.user.email)).order_by('-id')
 
  
         ctx['count_all']        = base_qs.count()
@@ -118,3 +123,57 @@ def support_reply_view(request, pk):
  
     messages.error(request, "Invalid request.")
     return redirect('support_list_url')
+
+@login_required
+def support_ticket_delete_view(request, pk):
+    obj = get_object_or_404(dashboard_models.Support, id=pk)
+    obj.delete()
+    messages.success(request, "Suppport ticket deleted successfully.")
+    return redirect('support_list_url')
+
+@require_POST
+def customer_get_it_now_view(request):
+    full_name = request.POST.get('full_name', '').strip()
+    contact_no = request.POST.get('contact_number', '').strip()
+    email = request.POST.get('email', '').strip()
+    message = request.POST.get('message', '').strip()
+
+    if not full_name:
+        return JsonResponse({'success': False, 'message': 'Full name is required.'}, staus=400)
+    if not contact_no:
+        return JsonResponse({'success': False, 'message': 'Contact number is required.'}, status=400)
+    
+    dashboard_models.GetItNow.objects.create(
+        full_name = full_name, contact_no = contact_no, email = email, message = message
+    )
+
+    return JsonResponse({'success': True, 'message': 'Thank you! We will get back to you soon.'})
+
+
+@login_required
+def leads_view(request):
+    obj_list = dashboard_models.GetItNow.objects.all()
+    return render(request, 'dashboard/leads.html', {'obj_list': obj_list})
+
+@login_required
+def leads_delete_view(request, pk):
+    obj = get_object_or_404(dashboard_models.GetItNow, id=pk)
+    obj.delete()
+    messages.success(request, "Leads deleted successfully!!")
+    return redirect('leads_url')
+
+@login_required
+def toggle_contact_status(request, pk):
+    obj = get_object_or_404(dashboard_models.GetItNow, id=pk)
+
+    obj.is_contacted = not obj.is_contacted
+    if obj.is_contacted:
+        obj.contacted_by = request.user
+        obj.updated_at = timezone.now()
+    else:
+        obj.contacted_by = None
+    
+    obj.save()
+
+    messages.success(request, "Contact status updated successfully.")
+    return redirect("leads_url")

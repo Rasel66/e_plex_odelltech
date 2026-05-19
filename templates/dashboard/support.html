@@ -1,4 +1,4 @@
-{% extends "dashboard.html" %}
+{% extends "base.html" %}
 {% load static %}
 {% load crispy_forms_tags %}
 {% block title %}Create Support{% endblock  %}
@@ -8,73 +8,140 @@
 {% endblock %}
 
 {% block content %}
-<h2 class="sr-only" style="position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0)">E-Plex support request form with hero section and input fields</h2>
 
-<div class="wrap">
-  <div class="hero">
-    <div class="logo-wrap">
-      <span class="logo-name fw-bold">E-Plex</span>
-    </div>
-    <p class="tagline">Your Store.<br><span class="hi">Your Way.</span></p>
-    <div class="features">
-      <div class="feat"><div class="feat-icon"><i class="bi bi-basket2 fs-5" style="color:#ffffff"></i></div><div class="feat-text">Modern e-commerce solutions</div></div>
-      <div class="feat"><div class="feat-icon"><i class="bi bi-rocket-takeoff fs-5" style="color:#ffffff"></i></div><div class="feat-text">Fast & reliable service</div></div>
-      <div class="feat"><div class="feat-icon"><i class="bi bi-headset fs-5" style="color:#ffffff"></i></div><div class="feat-text">24/7 customer support</div></div>
-    </div>
-    <div class="hero-footer">
-      <p>Trusted by thousands of merchants. We're here whenever you need us — submit a ticket and our team responds promptly.</p>
-    </div>
-  </div>
+        <div class="hero-section">
 
-  <div class="form-side">
-    <div class="form-head">
-      <h1 class="form-title fw-bold">E-Plex Support</h1>
-      <p class="form-sub">We're here to help</p>
-      <p class="form-desc">Need help? Submit your request by filling out this form with the required details about your business and the issue you're facing.</p>
-      <div class="privacy"><strong>Privacy notice:</strong> Your account information may be recorded when you submit this form.</div>
-    </div>
+            <div class="hero-content">
 
-    <div class="alert-box" id="alert"></div>
-    <form method="post" enctype="multipart/form-data">
-      {% csrf_token %}
-      <div class="row">
-        <div class="col-md-6">
-          {{form.name|as_crispy_field}}
-        </div>
-        <div class="col-md-6">
-          {{form.enlisted_email|as_crispy_field}}
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-6">
-          {{form.contact_no|as_crispy_field}}
-        </div>
-        <div class="col-md-6">
-          {{form.business_name|as_crispy_field}}
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-12">
-          {{form.problem_statement|as_crispy_field}}
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-12">
-          {{form.attachment|as_crispy_field}}
-        </div>
-      </div>
+                <!-- LOGO -->
 
-      <button type="submit" class="submit-btn">
-        <div class="spin" id="spinner"></div>Submit support request
-      </button>
-    </form>
+                <div class="logo-box">
+
+                    <div class="logo-icon">
+
+                        <img
+                            src="https://lh3.googleusercontent.com/d/1M8UOiHTK30z3qTPVKHm0_ezE-7xELlPp"
+                            alt="E-Plex Logo"
+                        >
+
+                    </div>
+
+                </div>
+
+                <!-- TAGLINE -->
+
+                <p class="tagline">
+                    Your Store.
+                    <span class="highlight">Your Way.</span>
+                </p>
+
+                <!-- FEATURES -->
+
+                <div class="feature-list">
+
+                    <div class="feature-item">
+                        <div class="feature-icon">✨</div>
+                        <div class="feature-text">
+                            Modern E-Commerce Solutions
+                        </div>
+                    </div>
+
+                    <div class="feature-item">
+                        <div class="feature-icon">🚀</div>
+                        <div class="feature-text">
+                            Fast & Reliable Service
+                        </div>
+                    </div>
+
+                    <div class="feature-item">
+                        <div class="feature-icon">💼</div>
+                        <div class="feature-text">
+                            24/7 Customer Support
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- FORM SECTION -->
+
+        <div class="form-section">
+
+            <h1 class="form-title">
+                E-Plex Support
+            </h1>
+
+            <p class="form-subtitle">
+                We're Here to Help
+            </p>
+
+            <p class="form-description">
+                Need help? Submit your request by filling out this form with the required details about your business and the issue you're facing.
+            </p>
+
+            <div class="privacy-notice">
+                <strong>Privacy Notice:</strong>
+                Your account information may be recorded when you submit this form.
+            </div>
+
+            <div id="alert"></div>
+
+            <!-- FORM -->
+
+            <form method="post" id="submit_form" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="row">
+                <div class="col-md-6">
+                {{form.name|as_crispy_field}}
+                </div>
+                <div class="col-md-6">
+                {{form.enlisted_email|as_crispy_field}}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                {{form.contact_no|as_crispy_field}}
+                </div>
+                <div class="col-md-6">
+                {{form.business_name|as_crispy_field}}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                {{form.problem_statement|as_crispy_field}}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                {{form.attachment|as_crispy_field}}
+                </div>
+            </div>
+
+            <button id="submit_btn" type="submit" class="submit-btn">
+                <div class="spin" id="spinner"></div>Submit support request
+            </button>
+            </form>
   </div>
 </div>
+
+
+        </div>
+
+
 
 {% endblock  %}
 
 {% block JS %}
 <script>
+$('#submit_btn').click(function(){
+  $(this).prop('disabled', true);
+  $('#submit_form').submit();
+});
+
+
 document.getElementById('s-file').addEventListener('change', function(){
   const nm = this.files[0]?.name;
   document.getElementById('fileName').textContent = nm || 'Choose file…';
