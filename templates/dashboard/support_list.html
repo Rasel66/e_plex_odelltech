@@ -264,7 +264,7 @@
 
         <div class="modal-header">
             <h5 class="modal-title" id="supportReplyModalLabel">
-                <i class="bi bi-headset"></i> Ticket reply
+                <i class="bi bi-headset"></i> Ticket Reply
             </h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
         </div>
@@ -274,7 +274,7 @@
             <div class="modal-user-strip">
             <div class="support-avatar support-avatar-blue" id="modalAvatar"></div>
             <div>
-                <div class="modal-user-strip-label">Submitted by</div>
+                <div class="modal-user-strip-label">Submitted By</div>
                 <div class="modal-user-strip-name"  id="modalUserName"></div>
                 <div class="modal-user-strip-email" id="modalUserEmail"></div>
             </div>
@@ -286,7 +286,7 @@
                     <span class="modal-field-value" id="modalName"></span>
                 </div>
             <div>
-                <span class="modal-field-label">Enlisted email</span>
+                <span class="modal-field-label">Enlisted Email</span>
                 <span class="modal-field-value" id="modalEmail"></span>
             </div>
             <div>
@@ -294,11 +294,11 @@
                 <span class="modal-field-value" id="modalContact"></span>
             </div>
             <div>
-                <span class="modal-field-label">Business name</span>
+                <span class="modal-field-label">Business Name</span>
                 <span class="modal-field-value" id="modalBusiness"></span>
             </div>
             <div class="modal-field-full">
-                <span class="modal-field-label">Problem statement</span>
+                <span class="modal-field-label">Problem Statement</span>
                 <p class="modal-field-value-problem" id="modalProblem"></p>
             </div>
             </div>
@@ -306,7 +306,7 @@
             {# Previous remarks #}
             <div class="modal-prev-remarks-wrap d-none" id="modalPrevRemarksWrap">
             <span class="modal-prev-remarks-label">
-                <i class="bi bi-chat-left-text"></i> Previous remarks
+                <i class="bi bi-chat-left-text"></i> Previous Remarks
             </span>
             <div class="modal-prev-remarks" id="modalPrevRemarks"></div>
             </div>
@@ -315,7 +315,7 @@
 
             {# Reply form #}
             <div class="modal-section-title">
-            <i class="bi bi-reply-fill"></i> Your reply
+            <i class="bi bi-reply-fill"></i> Your Reply
             </div>
 
             <form id="supportReplyForm" method="POST" action="">
@@ -325,12 +325,11 @@
             <input type="hidden" name="active_filter" id="modalActiveFilter" value="">
 
             <div class="mb-3">
-                <label class="modal-form-label" for="modalStatusSelect">Update status</label>
+                <label class="modal-form-label" for="modalStatusSelect">Update Status</label>
                 <select class="form-select form-select-sm" name="status" id="modalStatusSelect">
-                {# Only allow meaningful forward transitions #}
-                <option value="on_progress">On Progress</option>
-                <option value="solved">Solved</option>
-
+                    <option value="" disabled selected hidden>--Select--</option>
+                    <option value="on_progress">On Progress</option>
+                    <option value="solved">Solved</option>
                 </select>
             </div>
 
@@ -439,7 +438,12 @@
     const statusSelect = document.getElementById('modalStatusSelect');
     const currentStatus = btn.dataset.status;
     const optionExists  = Array.from(statusSelect.options).some(o => o.value === currentStatus);
-    statusSelect.value = optionExists ? currentStatus : 'in_progress';
+    // statusSelect.value = optionExists ? currentStatus : 'in_progress';
+    if (currentStatus && currentStatus !== 'pending') {
+        statusSelect.value = currentStatus;
+    } else {
+        statusSelect.value = '';
+    }
 
     // Pre-fill remarks textarea
     document.getElementById('modalRemarksInput').value = remarks;

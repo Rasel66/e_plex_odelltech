@@ -114,7 +114,7 @@ def support_reply_view(request, pk):
         support_obj.support_by = request.user
         support_obj.save()
  
-        messages.success(request, f"Ticket #{pk} updated to '{support_obj.get_status_display()}'.")
+        messages.success(request, f"Ticket #{support_obj.support_id} updated to '{support_obj.get_status_display()}'.")
  
         return redirect(f"{reverse('support_list_url')}?status={active_filter}")
  
