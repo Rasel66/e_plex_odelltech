@@ -102,22 +102,19 @@ def support_reply_view(request, pk):
         messages.error(request, "You are not authorised to reply to support tickets.")
         return redirect('support_list_url')
  
-    support_obj = get_object_or_404(dashboard_models.Support, pk=pk)
+    support_obj = get_object_or_404(dashboard_models.Support, id=pk)
  
     if request.method == 'POST':
-        remarks       = request.POST.get('remarks', '').strip()
-        status        = request.POST.get('status', support_obj.status).strip()
+        remarks = request.POST.get('remarks', '').strip()
+        status  = request.POST.get('status', support_obj.status).strip()
         active_filter = request.POST.get('active_filter', 'all')
  
         support_obj.remarks = remarks
         support_obj.status  = status
-        support_obj.user = request.user
+        support_obj.support_by = request.user
         support_obj.save()
  
-        messages.success(
-            request,
-            f"Ticket #{pk} updated to '{support_obj.get_status_display()}'."
-        )
+        messages.success(request, f"Ticket #{pk} updated to '{support_obj.get_status_display()}'.")
  
         return redirect(f"{reverse('support_list_url')}?status={active_filter}")
  
