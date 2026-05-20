@@ -6,7 +6,7 @@ from accounts.choices import USER_TYPE_CHOICES
 
 # Create your models here.
 def phone_number_validator(value):
-    pattern = r'^(\+8801|01)[3-9]\d{8}$'
+    pattern = r'^\+?\d{7,15}$'
     if not re.match(pattern, value):
         raise ValidationError('Enter a valid phone number')
 

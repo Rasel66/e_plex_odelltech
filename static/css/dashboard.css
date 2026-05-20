@@ -1163,8 +1163,7 @@ tbody td {
   .mobile-menu-btn {
     display: flex;
   }
-  .topbar-toggle,
-  .breadcrumb {
+  .topbar-toggle {
     display: none;
   }
   .search-bar {
@@ -1182,10 +1181,6 @@ tbody td {
   }
   .stat-value {
     font-size: 21px;
-  }
-  thead th:nth-child(n + 4),
-  tbody td:nth-child(n + 4) {
-    display: none;
   }
 }
 

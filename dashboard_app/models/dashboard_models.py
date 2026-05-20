@@ -1,10 +1,12 @@
+import uuid
 from django.db import models
 from dashboard_app.models import choices
 from accounts.models import phone_number_validator, User
 
 class Support(models.Model):
-    support_id = models.CharField(max_length=20, unique=True, blank=True, null=True)
+    support_id = models.CharField(max_length=20, unique=True, blank=True, null=True, editable=False)
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='support_user', blank=True, null=True)
+    support_by = models.ForeignKey(User, on_delete=models.CASCADE, related_name='supported_by_user',blank=True, null=True)
     name = models.CharField(max_length=100)
     enlisted_email = models.EmailField()
     contact_no = models.CharField(max_length=20, validators=[phone_number_validator])
@@ -16,15 +18,8 @@ class Support(models.Model):
 
     def save(self, *args, **kwargs):
         if not self.support_id:
-            last_support = Support.objects.order_by('-id').first()
-            if last_support and last_support.support_id:
-                last_number = int(last_support.support_id.split('-')[-1])
-                new_number = last_number + 1
-            else:
-                new_number = 1
-            
-            self.support_id = f'SUP-{new_number:04d}'
-            
+            self.support_id = uuid.uuid4().hex[:8].upper()
+    
         super().save(*args, **kwargs)
 
     def __str__(self):

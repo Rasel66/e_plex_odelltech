@@ -27,9 +27,10 @@
     <aside class="sidebar" id="sidebar">
 
         <div class="sidebar-header">
-            <div class="logo-mark">E</div>
-                <span class="logo-text">E-Plex</span>
-            </div>
+            <a href="{% url 'home_page_url' %}" style="text-decoration: none;"><div class="logo-mark">E</div></a>
+            <a href="{% url 'home_page_url' %}" style="text-decoration: none;"><span class="logo-text">E-Plex</span></a>
+        </div>
+            
 
         <div class="sidebar-body">
             <div class="nav-section">
@@ -126,9 +127,14 @@
         </button>
 
         <div class="breadcrumb">
-            Home
-            <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
-            <span id="bcPage">Dashboard</span>
+            <a href="{% url 'home_page_url' %}" style="
+                text-decoration: none; 
+                color: white; 
+                font-weight: bold;
+                background-color: #5D77F7;
+                padding: 3px 10px;
+                border-radius: 4px;
+            "><i class="bi bi-arrow-left"></i> Home</a>
         </div>
 
         {% comment %} <div class="search-bar">
