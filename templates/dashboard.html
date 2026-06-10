@@ -13,7 +13,9 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
-
+    {% block extra_css %}
+    
+    {% endblock %}
     <link rel="stylesheet" href="{% static 'css/dashboard.css' %}"/>
     <link rel="stylesheet" href="{% static 'css/dashboard_all.css' %}"/>
 
@@ -25,9 +27,10 @@
     <aside class="sidebar" id="sidebar">
 
         <div class="sidebar-header">
-            <div class="logo-mark">E</div>
-                <span class="logo-text">E-Plex</span>
-            </div>
+            <a href="{% url 'home_page_url' %}" style="text-decoration: none;"><div class="logo-mark">E</div></a>
+            <a href="{% url 'home_page_url' %}" style="text-decoration: none;"><span class="logo-text">E-Plex</span></a>
+        </div>
+            
 
         <div class="sidebar-body">
             <div class="nav-section">
@@ -44,12 +47,18 @@
                     <span class="chevron"><svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg></span>
                 </div>
                 <div class="submenu" id="sub-services">
-                    <a class="sub-item" href="#">Overview</a>
-                    <a class="sub-item" href="#">ePlex Services</a>
+                    {% comment %} <a class="sub-item" href="#">Overview</a>
+                    <a class="sub-item" href="#">ePlex Services</a> 
+                    <a class="sub-item" href="{% url 'support_create_url' %}">Create Support</a>{% endcomment %}
+                    
+                    <a class="sub-item" href="{% url 'support_list_url' %}">Support List</a>
+                    {% if request.user.user_type == 'support' %}
+                    <a class="sub-item" href="{% url 'leads_url' %}">Leads</a>
+                    {% endif %}
                 </div>
             </div>
 
-            <div class="nav-section">
+            {% comment %} <div class="nav-section">
                 <div class="nav-section-title">Account</div>
 
                 <a class="nav-item" href="{% url 'account_details_url' %}" data-page="Account Details">
@@ -83,7 +92,7 @@
                     <span class="nav-icon"><i class="bi bi-globe-central-south-asia"></i></span>
                     <span class="nav-label">E-Plex</span>
                 </a>
-            </div>
+            </div> {% endcomment %}
 
         </div>
 
@@ -93,7 +102,7 @@
                     {% if profile.image %}
                         <img src="{{ profile.image.url }}" alt="Avatar">
                     {% else %}
-                        <div class="avatar-placeholder">{{ profile.user.username|first|upper }}</div>
+                        <div class="avatar-placeholder">{{ user.username|first|upper }}</div>
                     {% endif %}
                 </div>
                 <div class="sidebar-footer-text">
@@ -118,9 +127,14 @@
         </button>
 
         <div class="breadcrumb">
-            Home
-            <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
-            <span id="bcPage">Dashboard</span>
+            <a href="{% url 'home_page_url' %}" style="
+                text-decoration: none; 
+                color: white; 
+                font-weight: bold;
+                background-color: #5D77F7;
+                padding: 3px 10px;
+                border-radius: 4px;
+            "><i class="bi bi-arrow-left"></i> Home</a>
         </div>
 
         {% comment %} <div class="search-bar">
@@ -129,13 +143,23 @@
         </div> {% endcomment %}
 
         <div class="topbar-actions">
-            <button class="topbar-btn" aria-label="Notifications">
-                <svg viewBox="0 0 24 24"><path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/><path d="M13.73 21a2 2 0 0 1-3.46 0"/></svg>
-                <span class="notif-dot"></span>
+            {% if request.user.user_type == 'support' %}
+            <button class="topbar-btn position-relative" aria-label="Notifications">
+                <svg viewBox="0 0 24 24">
+                    <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+                    <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+                </svg>
+
+                {% if pending_support_count > 0 %}
+                    <span class="notif-dot">
+                        {{ pending_support_count }}
+                    </span>
+                {% endif %}
             </button>
-            <button class="topbar-btn" aria-label="Help">
+            {% endif %}
+            {% comment %} <button class="topbar-btn" aria-label="Help">
                 <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
-            </button>
+            </button> {% endcomment %}
 
             <!-- Avatar + dropdown -->
             <div class="avatar-menu" id="avatarMenu">
@@ -234,10 +258,13 @@
     </div>
     </div>
 
-
+    {% block JS %}
+    
+    {% endblock %}
 
 
     <script src="https://cdn.jsdelivr.net/npm/toastify-js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
 
     <script>
@@ -341,6 +368,29 @@
                 item.classList.add('active');
             }
         });
+
+        // sweet delete
+
+
+        function SweetDelete(event, deleteUrl) {
+            event.preventDefault();
+
+            Swal.fire({
+                title: 'Are you sure?',
+                text: "This item will be deleted permanently!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#6c757d',
+                confirmButtonText: 'Yes, delete it!',
+                cancelButtonText: 'Cancel'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = deleteUrl;
+                }
+            });
+        }
+
     </script>
     <script>
         {% if messages %}

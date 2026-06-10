@@ -1,0 +1,207 @@
+{% extends "base.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block title %}Create Support{% endblock  %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'css/dashboard/support.css' %}"/>
+{% endblock %}
+
+{% block content %}
+
+        <div class="hero-section">
+
+            <div class="hero-content">
+
+                <!-- LOGO -->
+
+                <div class="logo-box">
+
+                    <div class="logo-icon">
+
+                        <img
+                            src="https://lh3.googleusercontent.com/d/1M8UOiHTK30z3qTPVKHm0_ezE-7xELlPp"
+                            alt="E-Plex Logo"
+                        >
+
+                    </div>
+
+                </div>
+
+                <!-- TAGLINE -->
+
+                <p class="tagline">
+                    Your Store.
+                    <span class="highlight">Your Way.</span>
+                </p>
+
+                <!-- FEATURES -->
+
+                <div class="feature-list">
+
+                    <div class="feature-item">
+                        <div class="feature-icon">✨</div>
+                        <div class="feature-text">
+                            Modern E-Commerce Solutions
+                        </div>
+                    </div>
+
+                    <div class="feature-item">
+                        <div class="feature-icon">🚀</div>
+                        <div class="feature-text">
+                            Fast & Reliable Service
+                        </div>
+                    </div>
+
+                    <div class="feature-item">
+                        <div class="feature-icon">💼</div>
+                        <div class="feature-text">
+                            24/7 Customer Support
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <!-- FORM SECTION -->
+
+        <div class="form-section">
+
+            <h1 class="form-title">
+                E-Plex Support
+            </h1>
+
+            <p class="form-subtitle">
+                We're Here to Help
+            </p>
+
+            <p class="form-description">
+                Need help? Submit your request by filling out this form with the required details about your business and the issue you're facing.
+            </p>
+
+            <div class="privacy-notice">
+                <strong>Privacy Notice:</strong>
+                Your account information may be recorded when you submit this form.
+            </div>
+
+            <div id="alert"></div>
+
+            <!-- FORM -->
+
+            <form method="post" id="submit_form" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="row">
+                <div class="col-md-6">
+                {{form.name|as_crispy_field}}
+                </div>
+                <div class="col-md-6">
+                {{form.enlisted_email|as_crispy_field}}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                {{form.contact_no|as_crispy_field}}
+                </div>
+                <div class="col-md-6">
+                {{form.business_name|as_crispy_field}}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                {{form.problem_statement|as_crispy_field}}
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                {{form.attachment|as_crispy_field}}
+                </div>
+            </div>
+
+            <button id="submit_btn" type="submit" class="submit-btn">
+                <div class="spin" id="spinner"></div>Submit support request
+            </button>
+            </form>
+  </div>
+</div>
+
+
+        </div>
+
+
+
+{% endblock  %}
+
+{% block JS %}
+<script>
+$('#submit_btn').click(function(){
+  $(this).prop('disabled', true);
+  $('#submit_form').submit();
+});
+
+
+document.getElementById('s-file').addEventListener('change', function(){
+  const nm = this.files[0]?.name;
+  document.getElementById('fileName').textContent = nm || 'Choose file…';
+});
+
+function showAlert(msg, ok){
+  const a = document.getElementById('alert');
+  a.style.display = 'block';
+  a.style.background = ok ? 'var(--color-background-success)' : 'var(--color-background-danger)';
+  a.style.color = ok ? 'var(--color-text-success)' : 'var(--color-text-danger)';
+  a.style.border = ok ? '0.5px solid var(--color-border-success)' : '0.5px solid var(--color-border-danger)';
+  a.textContent = msg;
+}
+
+function handleSubmit(){
+  const name = document.getElementById('s-name').value.trim();
+  const email = document.getElementById('s-email').value.trim();
+  const contact = document.getElementById('s-contact').value.trim();
+  const prob = document.getElementById('s-prob').value.trim();
+  if(!name || !email || !contact || !prob){
+    showAlert('Please fill in all required fields.', false);
+    return;
+  }
+  const btn = document.getElementById('submitBtn');
+  btn.disabled = true;
+  document.getElementById('spinner').style.display = 'block';
+  document.getElementById('sendIcon').style.display = 'none';
+  document.getElementById('btnText').textContent = 'Submitting…';
+  setTimeout(()=>{
+    btn.disabled = false;
+    document.getElementById('spinner').style.display = 'none';
+    document.getElementById('sendIcon').style.display = 'block';
+    document.getElementById('btnText').textContent = 'Submit support request';
+    showAlert('Your request has been submitted! We\'ll get back to you shortly.', true);
+  }, 1800);
+}
+
+</script>
+
+{% if messages %}
+    {% for message in messages %}
+        <script>
+            Toastify({
+                text: "{{ message }}",
+                duration: 3000,
+                close: true,
+                gravity: "top",
+                position: "right",
+
+                backgroundColor:
+                    "{% if message.tags == 'success' %}green
+                    {% elif message.tags == 'error' %}red
+                    {% elif message.tags == 'warning' %}orange
+                    {% else %}blue
+                    {% endif %}"
+
+            }).showToast();
+        </script>
+
+    {% endfor %}
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,131 @@
+{% extends "dashboard.html" %}
+{% load static %}
+{% block title %}Leads{% endblock %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'css/dashboard/table_design.css' %}"/>
+{% endblock %}
+
+{% block content %}
+
+<div class="support-card m-2">
+  <div class="support-card-header">
+    <h5 class="support-card-title">
+      <i class="bi bi-headset"></i>
+      Leads
+    </h5>
+  </div>
+
+  <div class="table-responsive">
+    <table class="support-table">
+      <thead>
+        <tr>
+          <th style="width: 5%;">SL</th>
+          <th style="width: 16%">Submitted by</th>
+          <th>Contact</th>
+          <th>Contacted By</th>
+          <th>Created Time</th>
+          <th>Contacted Time</th>
+          <th>Is Contacted</th>
+          {% comment %} <th>Action</th> {% endcomment %}
+        </tr>
+      </thead>
+      <tbody>
+        {% for obj in obj_list %}
+        <tr>
+            <td class="support-sl">{{ forloop.counter|stringformat:"02d" }}</td>
+            <td>
+                <div class="support-user-cell">
+                    <div>
+                        <div class="support-user-name">{{ obj.full_name }}</div>
+                        <div class="support-user-email">{{ obj.email }}</div>
+                    </div>
+                </div>
+            </td>
+            <td class="support-contact">{{ obj.contact_no }}</td>
+            <td>
+                {% if obj.is_contacted %}
+                    <div class="support-user-cell">
+                        <div>
+                            <div class="support-user-name">{{ obj.contacted_by.username }}</div>
+                            <div class="support-user-email">{{ obj.contacted_by.email }}</div>
+                        </div>
+                    </div>
+                {% else %}
+                    <span class="support-no-attach">—</span>
+                {% endif %}
+            </td>
+            <td>{{ obj.created_at|date:"d M Y h:i A" }}</td>
+            <td>
+                {% if obj.is_contacted %}
+                {{ obj.updated_at|date:"d M Y h:i A" }}</td>
+                {% else %}
+                    <span class="support-no-attach">—</span>
+                {% endif %}
+            <td>
+                <form action="{% url 'toggle_contact_status_url' obj.id %}" method="post">
+                    {% csrf_token %}
+                    <button type="submit" class="btn btn-sm {% if obj.is_contacted %}btn-success{% else %}btn-danger{% endif %}">
+                        {% if obj.is_contacted %}
+                            ✓ Contacted
+                        {% else %}
+                            ✗ Not Contacted
+                        {% endif %}
+                    </button>
+                     <div class="small text-muted mt-1">
+                        Click to change status
+                    </div>
+                </form>
+            </td>
+            {% comment %} <td>
+                <a href="{% url 'update_color_url' obj.id %}" class="edit_btn" title="Edit">
+                    <i class="fas fa-edit"></i>
+                </a> 
+
+                <a href="{% url 'leads_delete_url' obj.id %}" class="btn btn-danger btn-sm" title="Delete" 
+                    onclick="SweetDelete(event, this.href)">Delete
+                </a>
+
+            </td> {% endcomment %}
+        </tr>
+        {% empty %}
+        <tr>
+          <td colspan="{% if request.user.user_type == 'support' %}7{% else %}6{% endif %}">
+            <div class="support-empty">
+              <i class="bi bi-inbox support-empty-icon"></i>
+              <p class="support-empty-text">
+                No {{ active_filter|default:"" }} tickets found.
+              </p>
+            </div>
+          </td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+{% endblock %}
+
+
+{% block JS %}
+
+{% if messages %}
+  {% for message in messages %}
+    <script>
+      Toastify({
+        text: "{{ message }}",
+        duration: 3000,
+        close: true,
+        gravity: "top",
+        position: "right",
+        backgroundColor:
+          "{% if message.tags == 'success' %}#198754{% elif message.tags == 'error' %}#dc3545{% elif message.tags == 'warning' %}#fd7e14{% else %}#0d6efd{% endif %}"
+      }).showToast();
+    </script>
+  {% endfor %}
+{% endif %}
+
+
+{% endblock %}
