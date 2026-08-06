@@ -14,8 +14,9 @@ SECRET_KEY = 'django-insecure-l=kvdzl!)^*mrb+xt^e)#w0*!i9eb^ur2a5blgzpzcsy*m1_0a
 DEBUG = True
 
 ALLOWED_HOSTS = ['*']
-
-
+SUPPORT_API_KEY = "eplex_support_2026_@#$%_secret"
+SUPPORT_DETAIL_API="http://127.0.0.1:8000/dashboard/api/support/"
+SUPPORT_REPLY_API="http://127.0.0.1:8000/dashboard/api/support/"
 # Application definition
 
 INSTALLED_APPS = [
@@ -31,6 +32,7 @@ INSTALLED_APPS = [
     'e_plex_app',
     'accounts',
     'dashboard_app',
+    'rest_framework',
 ]
 
 CRISPY_TEMPLATE_PACK = "bootstrap5"
@@ -74,8 +76,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'eplexsoft_eplex_user_journey_db',
-        'USER': 'eplexsoft_eplexsoft',
-        'PASSWORD': 'eplexsoft@eplexsoft',
+        'USER': 'root',
+        'PASSWORD': '',
         'HOST': '127.0.0.1',
         'PORT': '3306',
         'OPTIONS': {

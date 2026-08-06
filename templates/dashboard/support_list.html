@@ -48,7 +48,7 @@
   <div class="table-responsive">
     <table class="support-table">
       <thead>
-        <tr>
+        <tr >
           <th style="width: 11%">Support ID</th>
           <th style="width: 15%">Submitted by</th>
           <th>Contact</th>
@@ -67,7 +67,8 @@
       </thead>
       <tbody>
         {% for obj in obj_list %}
-        <tr>
+        <tr style="cursor:pointer;"
+    onclick="window.location='{% url 'support_details' obj.support_id %}'">
             <td class="support-sl">{{ obj.support_id }}</td>
             <td>
                 <div class="support-user-cell">
