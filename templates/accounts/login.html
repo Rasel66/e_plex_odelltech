@@ -53,11 +53,14 @@
 
       <button type="submit" class="btn-submit">Sign In</button>
     </form>
+{% if request.user.is_supperuser %}
 
     <p class="footer-text">
         Don't have an account? 
       <a href="{% url 'register_url' %}">Register</a>
     </p>
+{% endif %}
+
   </div>
 </div>
 {% endblock %}

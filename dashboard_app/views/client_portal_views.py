@@ -14,6 +14,7 @@ from django.utils.decorators import method_decorator
 from dashboard_app.models import dashboard_models
 from dashboard_app.forms import dashboard_forms
 
+from dashboard_app.helper import get_support_details
 
 def is_support_user(user):
     return user.is_authenticated and user.user_type == 'support'
@@ -70,13 +71,7 @@ class SupportListView(ListView):
  
     def get_queryset(self):
         status_filter = self.request.GET.get('status', 'all')
-        qs = dashboard_models.Support.objects.select_related('user').all().order_by('-id')
- 
-        if not is_support_user(self.request.user):
-            qs = qs.filter(Q(enlisted_email=self.request.user.email))
- 
-        if status_filter and status_filter not in ('', 'all'):
-            qs = qs.filter(status=status_filter)
+        qs = dashboard_models.Support.objects.all().order_by('-id')
  
         return qs
  
@@ -174,3 +169,226 @@ def toggle_contact_status(request, pk):
 
     messages.success(request, "Contact status updated successfully.")
     return redirect("leads_url")
+
+
+from django.conf import settings
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework import status
+
+from ..serializers import SupportCreateSerializer
+
+
+class SupportCreateAPIView(APIView):
+
+    authentication_classes = []
+    permission_classes = []
+
+    def post(self, request):
+
+        api_key = request.headers.get("X-API-KEY")
+
+        if api_key != settings.SUPPORT_API_KEY:
+            return Response(
+                {
+                    "status": False,
+                    "message": "Invalid API Key"
+                },
+                status=status.HTTP_401_UNAUTHORIZED
+            )
+
+        serializer = SupportCreateSerializer(data=request.data)
+
+        if serializer.is_valid():
+
+            support = serializer.save()
+
+            return Response(
+                {
+                    "status": True,
+                    "message": "Support Created Successfully",
+                    "support_id": support.support_id
+                },
+                status=status.HTTP_201_CREATED
+            )
+        print(serializer.errors) 
+        return Response(
+            {
+                "status": False,
+                "errors": serializer.errors
+            },
+            status=status.HTTP_400_BAD_REQUEST
+        )
+
+
+
+
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from django.conf import settings
+
+from dashboard_app.models import dashboard_models
+from ..serializers import SupportListSerializer
+
+
+class MySupportListAPIView(APIView):
+
+    authentication_classes = []
+    permission_classes = []
+
+    def get(self, request):
+
+        api_key = request.headers.get("X-API-KEY")
+
+        if api_key != settings.SUPPORT_API_KEY:
+            return Response(
+                {"status": False, "message": "Invalid API Key"},
+                status=401
+            )
+
+        email = request.GET.get("email")
+
+        queryset = dashboard_models.Support.objects.all()
+
+        if email:
+            queryset = queryset.filter(enlisted_email=email)
+
+        serializer = SupportListSerializer(queryset.order_by("-id"), many=True)
+
+        return Response({
+            "status": True,
+            "data": serializer.data
+        })
+
+from rest_framework import generics
+from ..serializers import SupportDetailSerializer,SupportReplySerializer,AdminSupportReplySerializer
+class SupportDetailAPIView(generics.RetrieveAPIView):
+
+    serializer_class = SupportDetailSerializer
+
+    lookup_field = "support_id"
+
+    queryset = dashboard_models.Support.objects.all()
+
+
+class SupportReplyCreateAPIView(APIView):
+
+    def post(self, request, support_id):
+
+        support = dashboard_models.Support.objects.get(
+            support_id=support_id
+        )
+
+        serializer = SupportReplySerializer(
+            data=request.data
+        )
+
+        serializer.is_valid(raise_exception=True)
+
+        serializer.save(
+
+            support=support,
+
+            user=request.user,
+
+            is_central_reply=False
+
+        )
+
+        return Response(
+
+            serializer.data,
+
+            status=status.HTTP_201_CREATED
+
+        )
+
+
+def support_details(request, support_id):
+
+    response = get_support_details(support_id)
+
+    if response.status_code != 200:
+        return redirect("support_list")
+
+    ticket = response.json()
+
+    return render(
+        request,
+        "dashboard/new_support_detail.html",
+        {
+            "ticket": ticket
+        }
+    )
+
+
+class SupportReplyAPIView(APIView):
+
+    def post(self, request, support_id):
+
+        ticket = dashboard_models.Support.objects.filter(support_id=support_id).first()
+
+        if not ticket:
+            return Response(
+                {
+                    "status": False,
+                    "message": "Support ticket not found."
+                },
+                status=status.HTTP_404_NOT_FOUND
+            )
+
+        serializer = AdminSupportReplySerializer(
+            data=request.data
+        )
+
+        if serializer.is_valid():
+
+            dashboard_models.SupportReply.objects.create(
+                support=ticket,
+                user=request.data.get("user"),
+                message=serializer.validated_data["message"],
+                attachment=serializer.validated_data.get("attachment"),
+                is_central_reply=True
+            )
+
+            ticket.status = serializer.validated_data["status"]
+            ticket.save(update_fields=["status"])
+
+            return Response(
+                {
+                    "status": True,
+                    "message": "Reply submitted successfully."
+                }
+            )
+
+        return Response(serializer.errors, status=400)
+
+from dashboard_app.helper import reply_support_ticket
+
+def admin_support_reply_view(request, support_id):
+
+    if request.method == "POST":
+        ticket_id=support_id
+        data = {
+            "user": getattr(request.user, "name", None) or "Support User",
+            "message": request.POST.get("message"),
+            "status": request.POST.get("status"),
+        }
+
+        files = {}
+
+        if request.FILES.get("attachment"):
+            files["attachment"] = request.FILES["attachment"]
+
+        response = reply_support_ticket(
+            ticket_id,
+            data,
+            files
+        )
+
+        if response.ok:
+            messages.success(request, "Reply sent successfully.")
+        else:
+            messages.error(request, f"Failed to send reply. {response.text}")
+
+        return redirect("support_details", support_id=support_id)
