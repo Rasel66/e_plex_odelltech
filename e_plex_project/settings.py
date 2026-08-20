@@ -15,8 +15,8 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 SUPPORT_API_KEY = "eplex_support_2026_@#$%_secret"
-SUPPORT_DETAIL_API="http://127.0.0.1:8000/dashboard/api/support/"
-SUPPORT_REPLY_API="http://127.0.0.1:8000/dashboard/api/support/"
+SUPPORT_DETAIL_API="https://eplexsoft.com/dashboard/api/support/"
+SUPPORT_REPLY_API="https://eplexsoft.com/dashboard/api/support/"
 # Application definition
 
 INSTALLED_APPS = [
@@ -76,8 +76,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'eplexsoft_eplex_user_journey_db',
-        'USER': 'root',
-        'PASSWORD': '',
+        'USER': 'eplexsoft_eplexsoft',
+        'PASSWORD': 'eplexsoft@eplexsoft',
         'HOST': '127.0.0.1',
         'PORT': '3306',
         'OPTIONS': {
